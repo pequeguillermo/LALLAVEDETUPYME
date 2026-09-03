@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /gracias/
+
+Sitemap: https://lallavedetupyme.com/sitemap.xml
+

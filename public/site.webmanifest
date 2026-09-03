@@ -1,0 +1,15 @@
+{
+  "name": "La Llave de tu Pyme",
+  "short_name": "La Llave",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070707",
+  "theme_color": "#070707",
+  "icons": [
+    {
+      "src": "/assets/logo-la-llave.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
