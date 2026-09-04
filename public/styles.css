@@ -426,8 +426,8 @@ em { color: var(--orange); font-family: Georgia, serif; font-weight: 400; }
 .contact-promises p { display: grid; grid-template-columns: 42px 1fr; padding: 18px 0; margin: 0; border-bottom: 1px solid var(--line); color: #b9b3ac; }
 .contact-promises span { color: var(--orange); font-family: var(--display); font-size: .72rem; }
 .thanks-section { min-height: 82svh; display: grid; place-items: center; padding: 180px 0 100px; position: relative; text-align: center; background: radial-gradient(circle at 50% 42%, rgba(255,77,0,.18), transparent 28%); }
-.thanks-section .container { max-width: 900px; }
-.thanks-key { position: absolute; color: rgba(255,77,0,.11); font-size: 50vw; line-height: 1; transform: rotate(-20deg); }
+.thanks-section .container { position: relative; z-index: 1; max-width: 900px; }
+.thanks-key { position: absolute; color: rgba(255,77,0,.11); font-size: 50vw; line-height: 1; pointer-events: none; user-select: none; transform: rotate(-20deg); }
 
 .site-footer { padding: 90px 0 24px; background: #030303; border-top: 1px solid var(--line); }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.25fr; gap: 65px; }
