@@ -226,7 +226,7 @@ em { color: var(--orange); font-family: Georgia, serif; font-weight: 400; }
 .hero-checks { list-style: none; padding: 0; margin: 42px 0 0; }
 .hero-checks li { padding: 11px 0; color: #bdb7b0; }
 .hero-checks li::before { content: "↗"; margin-right: 15px; color: var(--orange); }
-.form-shell { padding: clamp(28px, 4vw, 48px); color: var(--ink); background: var(--paper); box-shadow: 30px 40px 100px rgba(0,0,0,.32); scroll-margin-top: 18px; }
+.form-shell { padding: clamp(28px, 4vw, 48px); color: var(--ink); background: var(--paper); box-shadow: 30px 40px 100px rgba(0,0,0,.32); scroll-margin-top: 112px; }
 .form-index { display: block; margin-bottom: 34px; color: #6c6660; font-family: var(--display); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .lead-form label { display: grid; gap: 8px; margin-bottom: 19px; font-family: var(--display); font-size: .75rem; font-weight: 650; letter-spacing: .02em; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -529,7 +529,7 @@ em { color: var(--orange); font-family: Georgia, serif; font-weight: 400; }
   .outcome-panel { padding: 34px 25px; }
   .audit-hero, .contact-hero { padding: 120px 0 75px; }
   .audit-hero h1, .contact-hero h1 { font-size: clamp(2.65rem, 11.5vw, 4.2rem); }
-  .form-shell { margin-inline: -4px; padding: 28px 20px; }
+  .form-shell { margin-inline: -4px; padding: 28px 20px; scroll-margin-top: 90px; }
   .form-row { grid-template-columns: 1fr; gap: 0; }
   .benefit-grid article:not(:last-child) { margin: 0; border-right: 0; border-bottom: 1px solid #b4aea6; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px 25px; }
