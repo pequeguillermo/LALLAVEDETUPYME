@@ -1,8 +1,10 @@
-node_modules/
-dist/
 .env
 .env.*
+config/private.php
+dist/
+storage/logs/*
 *.log
 .DS_Store
 project.md
-
+local-backups/
+*-plesk-*.zip
