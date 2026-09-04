@@ -271,7 +271,7 @@ em { color: var(--orange); font-family: Georgia, serif; font-weight: 400; }
 .faq-list details[open] summary span { transform: rotate(45deg); }
 .faq-list details p { max-width: 760px; padding: 0 0 28px; color: #aaa49d; }
 
-.belief-section { overflow: hidden; color: var(--ink); background: var(--paper); }
+.belief-section { overflow: hidden; padding-bottom: clamp(36px, 4vw, 56px); color: var(--ink); background: var(--paper); }
 .belief-grid { position: relative; display: flex; min-height: 580px; align-items: center; justify-content: flex-end; isolation: isolate; }
 .belief-image { position: absolute; inset: 0 24% 0 0; overflow: hidden; box-shadow: 24px 30px 80px rgba(15,10,6,.16); }
 .belief-image::before { content: ""; position: absolute; z-index: 2; inset: 0 auto 0 0; width: 6px; background: var(--orange); }
@@ -289,7 +289,7 @@ em { color: var(--orange); font-family: Georgia, serif; font-weight: 400; }
 .agency-scale { padding-top: 40px; }
 .agency-scale .statement { margin-top: 0; }
 
-.team-section { color: var(--ink); background: var(--paper); }
+.team-section { padding-top: clamp(56px, 5vw, 76px); color: var(--ink); background: var(--paper); }
 .team-section .section-heading > p { color: #615c56; }
 .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(7,7,7,.25); border-left: 1px solid rgba(7,7,7,.25); }
 .team-card { position: relative; padding: 18px 18px 28px; border-right: 1px solid rgba(7,7,7,.25); border-bottom: 1px solid rgba(7,7,7,.25); overflow: hidden; }
@@ -479,6 +479,8 @@ em { color: var(--orange); font-family: Georgia, serif; font-weight: 400; }
   h1 { font-size: clamp(2.6rem, 12vw, 4.2rem); }
   h2 { font-size: clamp(2.15rem, 10vw, 3.4rem); }
   .section { padding: 88px 0; }
+  .belief-section { padding-bottom: 32px; }
+  .team-section { padding-top: 52px; }
   .site-header { position: fixed; }
   .header-inner { min-height: 76px; }
   .brand img { width: 135px; }
