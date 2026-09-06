@@ -36,10 +36,17 @@ final class SiteController
         $view = Page::viewFor($path);
         if ($view === null) {
             http_response_code(404);
-            $view = '404.html';
+            $view = '404.php';
         }
 
         $target = $this->viewsPath . DIRECTORY_SEPARATOR . $view;
+        if (!is_file($target)) {
+            $fallback = preg_replace('/\.php$/', '.html', $target);
+            if (is_string($fallback) && is_file($fallback)) {
+                $target = $fallback;
+            }
+        }
+
         if (!is_file($target)) {
             http_response_code(500);
             header('Content-Type: text/plain; charset=utf-8');
@@ -50,6 +57,10 @@ final class SiteController
         header('Content-Type: text/html; charset=utf-8');
         header('X-Content-Type-Options: nosniff');
         header('Referrer-Policy: strict-origin-when-cross-origin');
-        readfile($target);
+        if (str_ends_with($target, '.php')) {
+            require $target;
+        } else {
+            readfile($target);
+        }
     }
 }

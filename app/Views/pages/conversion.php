@@ -1,38 +1,17 @@
-﻿<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tu web y tus campañas no convierten | La Llave</title>
-  <meta name="description" content="Descubre qué frena las visitas y conversiones de tu web. Conectamos SEO, campañas, mensaje, web y medición para convertir actividad en oportunidades.">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://lallavedetupyme.com/agencia-marketing-conversiones/">
-  <meta property="og:locale" content="es_ES">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Tu web y tus campañas no convierten | La Llave">
-  <meta property="og:description" content="Descubre qué frena las visitas y conversiones de tu web. Conectamos SEO, campañas, mensaje, web y medición para convertir actividad en oportunidades.">
-  <meta property="og:url" content="https://lallavedetupyme.com/agencia-marketing-conversiones/">
-  <meta property="og:image" content="https://lallavedetupyme.com/assets/tierra.jpg">
-  <meta name="theme-color" content="#080808">
-  <link rel="icon" href="/assets/logo-la-llave.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/styles.css?v=20260904-7">
-  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"Organization","name":"La Llave de tu Pyme","url":"https://lallavedetupyme.com","logo":"https://lallavedetupyme.com/assets/logo-la-llave.png","description":"Agencia de marketing digital para pymes: estrategia, web, SEO, publicidad, contenidos y automatización bajo una misma dirección."},{"@context":"https://schema.org","@type":"Service","name":"Tu web y tus campañas no convierten | La Llave","url":"https://lallavedetupyme.com/agencia-marketing-conversiones/","serviceType":"Diagnóstico y mejora de captación y conversión","provider":{"@type":"Organization","name":"La Llave de tu Pyme","url":"https://lallavedetupyme.com"},"areaServed":"España"}]</script>
-  <!-- OpenAI / ChatGPT Ads Pixel -->
-  <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"2atj5meVpvtJ5kCtqhG3yX",debug:true});</script>
-</head>
-<body class="conversion-page">
-  <a class="skip-link" href="#contenido">Ir al contenido</a>
-  <div class="grain" aria-hidden="true"></div>
-  <div class="pointer-glow" aria-hidden="true"></div>
-  
-    <header class="site-header landing-header">
-      <div class="container header-inner">
-        <a class="brand" href="/" aria-label="La Llave de tu Pyme, inicio"><img src="/assets/logo-la-llave.png" width="168" height="64" alt="La Llave de tu Pyme"></a>
-        <a class="landing-header-cta" href="#diagnostico">Revisar mi caso <span aria-hidden="true">↓</span></a>
-      </div>
-    </header>
-  <main id="contenido">
+﻿<?php
+$title = 'Tu web y tus campañas no convierten | La Llave';
+$description = 'Descubre qué frena las visitas y conversiones de tu web. Conectamos SEO, campañas, mensaje, web y medición para convertir actividad en oportunidades.';
+$canonical = 'https://lallavedetupyme.com/agencia-marketing-conversiones/';
+$bodyClass = 'conversion-page';
+$schemaJson = '[{"@context":"https://schema.org","@type":"Organization","name":"La Llave de tu Pyme","url":"https://lallavedetupyme.com","logo":"https://lallavedetupyme.com/assets/logo-la-llave.png","description":"Agencia de marketing digital para pymes: estrategia, web, SEO, publicidad, contenidos y automatización bajo una misma dirección."},{"@context":"https://schema.org","@type":"Service","name":"Tu web y tus campañas no convierten | La Llave","url":"https://lallavedetupyme.com/agencia-marketing-conversiones/","serviceType":"Diagnóstico y mejora de captación y conversión","provider":{"@type":"Organization","name":"La Llave de tu Pyme","url":"https://lallavedetupyme.com"},"areaServed":"España"}]';
+$headerType = 'landing';
+$landingCtaText = 'Revisar mi caso';
+$landingCtaHref = '#diagnostico';
+$footerType = 'conversion';
+require dirname(__DIR__) . '/partials/head.php';
+require dirname(__DIR__) . '/partials/header.php';
+?>
+<main id="contenido">
     <section class="conversion-hero"><div class="container conversion-hero-grid"><div class="conversion-copy"><span class="eyebrow">Para negocios que ya hacen marketing, pero no ven retorno</span><h1>Tu web y tus campañas están activas. <em>Los resultados, no.</em></h1><p class="hero-lead">No necesitas abrir otro canal a ciegas. Necesitas saber si el freno está en la visibilidad, el tráfico, el mensaje, la web, la medición o el seguimiento. Lo encontramos, lo ponemos en orden y lo ejecutamos contigo.</p><a class="button" href="#diagnostico">Quiero descubrir qué está fallando <span aria-hidden="true">↓</span></a><p class="hero-proof">Revisamos tu caso antes de proponerte más presupuesto, más contenido o una web nueva.</p></div><figure class="conversion-visual" data-reveal><img src="/assets/landing-conversiones.jpg" width="1440" height="960" alt="Recorrido digital con distintos puntos de contacto y una ruta de conversión destacada"><figcaption><span>Visibilidad</span><i></i><span>Convicción</span><i></i><span>Conversión</span></figcaption></figure></div></section>
 
     <div class="conversion-signal-strip" aria-label="Problemas que revisamos"><div class="container"><span>Web sin visitas</span><i></i><span>Tráfico sin contactos</span><i></i><span>Campañas sin retorno</span><i></i><span>Datos sin decisiones</span></div></div>
@@ -66,11 +45,5 @@
     <section class="section faq-section"><div class="container"><span class="eyebrow">Antes de abrir la conversación</span><h2>Preguntas razonables.</h2><div class="faq-list"><details><summary>¿Vais a mirar solo SEO o solo campañas?<span>+</span></summary><p>No. La captación se rompe cuando se revisan por separado la visibilidad, el anuncio, el mensaje, la web, la medición y el seguimiento. Miramos el recorrido y profundizamos donde aparezca el cuello de botella.</p></details><details><summary>¿Me vais a decir que necesito otra web?<span>+</span></summary><p>Solo si los datos y el recorrido lo justifican. Muchas veces el problema se resuelve corrigiendo la propuesta, una página concreta, la medición o la continuidad comercial. No recomendamos rehacer por rehacer.</p></details><details><summary>¿Podéis trabajar sobre lo que ya tengo?<span>+</span></summary><p>Sí. Partimos de tu web, tus campañas, tus datos y las decisiones tomadas hasta ahora. No hace falta apagarlo todo ni empezar de cero para entender qué está pasando.</p></details><details><summary>¿Qué necesitáis para empezar?<span>+</span></summary><p>Tu web y una explicación honesta de lo que has probado, lo que esperabas y lo que está ocurriendo. Si después necesitamos acceso a analítica o campañas, te explicaremos para qué antes de pedirlo.</p></details><details><summary>¿Qué ocurre después de enviar el formulario?<span>+</span></summary><p>Revisamos el contexto y hablamos contigo para contrastar la situación. Si podemos ayudarte, definimos el primer frente, el alcance y cómo medirlo. Si falta información o no somos el equipo adecuado, también te lo diremos.</p></details></div></div></section>
 
     <section class="section conversion-close"><div class="container"><span class="eyebrow">El siguiente movimiento no es hacer más</span><h2>Es saber qué está fallando.</h2><p>Si tu web y tus campañas deberían estar produciendo más, empecemos por encontrar la razón.</p><a class="button" href="#diagnostico">Quiero revisar mi caso <span aria-hidden="true">↑</span></a></div></section></main>
-  <footer class="conversion-footer"><div class="container"><img src="/assets/logo-la-llave.png" width="168" height="64" alt="La Llave de tu Pyme"><a class="footer-email" href="mailto:info@lallavedetupyme.com">info@lallavedetupyme.com</a><span class="footer-legal"><a href="/aviso-legal/">Aviso legal</a><a href="/politica-de-privacidad/">Privacidad</a><a href="/politica-de-cookies/">Cookies</a></span></div></footer>
-  <a class="whatsapp-float" href="https://wa.me/34611458493?text=Hola%2C%20quiero%20revisar%20por%20qu%C3%A9%20mi%20web%20y%20mis%20campa%C3%B1as%20no%20est%C3%A1n%20dando%20los%20resultados%20que%20esperaba." target="_blank" rel="noopener noreferrer" aria-label="Hablar con La Llave de tu Pyme por WhatsApp">
-    <span class="whatsapp-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 4a11 11 0 0 0-9.5 16.5L5 27l6.7-1.4A11 11 0 1 0 16 4Z"/><path d="M12.2 10.4c.4-.3.8-.2 1 .3l1.1 2.5c.2.4.1.7-.2 1l-.8.8c1 2.1 2.5 3.6 4.7 4.6l.8-.9c.3-.3.7-.4 1-.2l2.4 1.2c.5.2.6.6.4 1-.6 1.5-1.8 2.3-3.3 2.2-5.3-.5-9.7-4.8-10.1-10.1-.1-1.1.8-2 3-2.4Z"/></svg></span>
-    <span><small>Estamos al otro lado</small><strong><span class="wa-desktop-label">Hablemos por WhatsApp</span><span class="wa-mobile-label">WhatsApp</span></strong></span>
-  </a>
-  <script src="/app.js?v=20260904-2" defer></script>
-</body>
-</html>
+<?php
+require dirname(__DIR__) . '/partials/footer.php';

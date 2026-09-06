@@ -1,23 +1,14 @@
-﻿<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Aviso legal | La Llave de tu Pyme</title>
-  <meta name="description" content="Información legal y condiciones de uso de La Llave de tu Pyme.">
-  <meta name="robots" content="noindex,follow">
-  <link rel="canonical" href="https://lallavedetupyme.com/aviso-legal/">
-  <meta name="theme-color" content="#080808">
-  <link rel="icon" href="/assets/logo-la-llave.png">
-  <link rel="stylesheet" href="/styles.css?v=20260904-7">
-  <!-- OpenAI / ChatGPT Ads Pixel -->
-  <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"2atj5meVpvtJ5kCtqhG3yX",debug:true});</script>
-</head>
-<body>
-  <a class="skip-link" href="#contenido">Ir al contenido</a>
-  <div class="grain" aria-hidden="true"></div>
-  <header class="site-header"><div class="container header-inner"><a class="brand" href="/" aria-label="La Llave de tu Pyme, inicio"><img src="/assets/logo-la-llave.png" width="168" height="64" alt="La Llave de tu Pyme"></a><a class="nav-cta" href="/contacto/">Abrir conversación</a></div></header>
-  <main id="contenido" class="legal-page">
+﻿<?php
+$title = 'Aviso legal | La Llave de tu Pyme';
+$description = 'Información legal y condiciones de uso de La Llave de tu Pyme.';
+$robots = 'noindex,follow';
+$canonical = 'https://lallavedetupyme.com/aviso-legal/';
+$headerType = 'minimal';
+$footerType = 'minimal';
+require dirname(__DIR__) . '/partials/head.php';
+require dirname(__DIR__) . '/partials/header.php';
+?>
+<main id="contenido" class="legal-page">
     <section class="page-hero"><div class="container"><span class="eyebrow">Información legal</span><h1>Aviso legal</h1><p class="hero-lead">Titularidad, condiciones de acceso y responsabilidades de este sitio web.</p></div></section>
     <section class="section"><div class="container legal-copy">
       <h2>1. Titular del sitio web</h2>
@@ -36,7 +27,5 @@
       <p class="legal-updated">Última actualización: 4 de septiembre de 2026.</p>
     </div></section>
   </main>
-  <footer class="site-footer"><div class="container footer-bottom"><span>© 2026 La Llave de tu Pyme</span><span class="footer-legal"><a href="/aviso-legal/">Aviso legal</a><a href="/politica-de-privacidad/">Privacidad</a><a href="/politica-de-cookies/">Cookies</a></span></div></footer>
-  <script src="/app.js?v=20260904-2" defer></script>
-</body>
-</html>
+<?php
+require dirname(__DIR__) . '/partials/footer.php';
