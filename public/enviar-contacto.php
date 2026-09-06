@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Services\ContactMailer;
+use App\Services\OpenAiAdsTracker;
 
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: strict-origin-when-cross-origin');
@@ -118,6 +119,19 @@ try {
     }
     @error_log('[' . date(DATE_ATOM) . '] Formulario: ' . $exception->getMessage() . PHP_EOL, 3, $logDirectory . '/mail-errors.log');
     respond(502, 'No hemos podido enviar tu solicitud ahora. Inténtalo de nuevo o escríbenos por WhatsApp al +34 611 458 493.', $wantsJson);
+}
+
+require dirname(__DIR__) . '/app/Services/OpenAiAdsTracker.php';
+
+try {
+    $openAiTracker = new OpenAiAdsTracker(
+        $config['openai_ads'] ?? [],
+        dirname(__DIR__) . '/storage/logs/openai-events.log'
+    );
+    $sourceUrl = (string) ($_SERVER['HTTP_REFERER'] ?? ($config['production_url'] . '/contacto/'));
+    $openAiTracker->trackRegistrationCompleted($sourceUrl);
+} catch (Throwable) {
+    // La analítica de servidor no debe impedir la respuesta al usuario.
 }
 
 respond(200, 'Gracias. Hemos recibido tu solicitud.', $wantsJson);
