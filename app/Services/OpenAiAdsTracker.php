@@ -1,128 +1,41 @@
 <?php
-
 declare(strict_types=1);
-
 namespace App\Services;
-
-use Throwable;
-
 final class OpenAiAdsTracker
 {
-    /** @param array<string, mixed> $config */
-    public function __construct(
-        private readonly array $config,
-        private readonly string $logPath
-    ) {
-    }
-
-    /**
-     * Envía el evento de conversión registration_completed a la API de OpenAI Ads (CAPI)
-     */
-    public function trackRegistrationCompleted(string $sourceUrl, ?string $eventId = null): bool
+    public function __construct(private readonly array $config) {}
+    public static function event(string $id, int $timestamp, string $email, ?string $oppref, ?string $obref): array
     {
-        $pixelId = (string) ($this->config['pixel_id'] ?? '2atj5meVpvtJ5kCtqhG3yX');
-        $apiKey = trim((string) ($this->config['api_key'] ?? ''));
-        $endpoint = (string) ($this->config['endpoint'] ?? 'https://bzr.openai.com/v1/events');
-
-        $id = $eventId ?: $this->generateEventId();
-        $timestampMs = (int) round(microtime(true) * 1000);
-
-        $payload = [
-            'validate_only' => false,
-            'events' => [
-                [
-                    'id' => $id,
-                    'type' => 'registration_completed',
-                    'timestamp_ms' => $timestampMs,
-                    'source_url' => $sourceUrl,
-                    'action_source' => 'web',
-                    'data' => [
-                        'type' => 'customer_action',
-                    ],
-                ],
-            ],
-        ];
-
-        $jsonPayload = json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-        if ($jsonPayload === false) {
-            return false;
-        }
-
-        // Si no hay API Key definida todavía, dejamos constancia en log sin fallar
-        if ($apiKey === '' || $apiKey === '<API-KEY>') {
-            $this->logEvent('SIMULADO (API Key pendiente de configurar en config/private.php)', $payload);
-            return true;
-        }
-
-        try {
-            $url = $endpoint . (str_contains($endpoint, '?') ? '&' : '?') . 'pid=' . urlencode($pixelId);
-
-            $ch = curl_init($url);
-            if ($ch === false) {
-                $this->logEvent('ERROR: no se pudo inicializar cURL', $payload);
-                return false;
-            }
-
-            curl_setopt_array($ch, [
-                CURLOPT_POST => true,
-                CURLOPT_POSTFIELDS => $jsonPayload,
-                CURLOPT_HTTPHEADER => [
-                    'Authorization: Bearer ' . $apiKey,
-                    'Content-Type: application/json',
-                ],
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_TIMEOUT => 6,
-                CURLOPT_CONNECTTIMEOUT => 3,
-                CURLOPT_SSL_VERIFYPEER => true,
-            ]);
-
-            $response = curl_exec($ch);
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $curlError = curl_error($ch);
-            curl_close($ch);
-
-            if ($curlError !== '' || $httpCode < 200 || $httpCode >= 300) {
-                $this->logEvent(
-                    "ERROR HTTP $httpCode: $curlError | Respuesta: " . (is_string($response) ? $response : ''),
-                    $payload
-                );
-                return false;
-            }
-
-            $this->logEvent("ÉXITO HTTP $httpCode | Respuesta: " . (is_string($response) ? $response : ''), $payload);
-            return true;
-        } catch (Throwable $e) {
-            $this->logEvent('EXCEPCIÓN: ' . $e->getMessage(), $payload);
-            return false;
-        }
+        $e = ['id'=>$id, 'type'=>'registration_completed', 'timestamp_ms'=>$timestamp,
+            'action_source'=>'web', 'source_url'=>'https://lallavedetupyme.com/gracias/', 'data'=>['type'=>'customer_action']];
+        if ($oppref !== null && $oppref !== '') $e['oppref'] = $oppref;
+        if ($obref !== null && $obref !== '') $e['user']['obref'] = $obref;
+        if (trim($email) !== '') $e['user']['emails_sha256'] = [hash('sha256', mb_strtolower(trim($email), 'UTF-8'))];
+        return $e;
     }
-
-    private function generateEventId(): string
+    public function configured(): bool
     {
-        return sprintf(
-            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-            mt_rand(0, 0xffff),
-            mt_rand(0, 0x0fff) | 0x4000,
-            mt_rand(0, 0x3fff) | 0x8000,
-            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
-        );
+        $key = trim((string) ($this->config['api_key'] ?? ''));
+        return $key !== '' && !str_contains($key, 'REEMPLAZAR') && $key !== '<API-KEY>';
     }
-
-    /** @param array<string, mixed> $payload */
-    private function logEvent(string $status, array $payload): void
+    public function send(array $event, bool $validateOnly): array
     {
-        $directory = dirname($this->logPath);
-        if (!is_dir($directory) && !mkdir($directory, 0750, true) && !is_dir($directory)) {
-            return;
-        }
-
-        $entry = sprintf(
-            "[%s] OpenAI Ads API: %s\nPayload: %s\n\n",
-            date(DATE_ATOM),
-            $status,
-            json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
-        );
-        @file_put_contents($this->logPath, $entry, FILE_APPEND | LOCK_EX);
+        if (!$this->configured()) return ['ok'=>false, 'retry'=>false, 'http'=>0, 'result'=>'missing_key'];
+        $ch = curl_init('https://bzr.openai.com/v1/events?pid=' . rawurlencode($this->config['pixel_id']));
+        curl_setopt_array($ch, [CURLOPT_POST=>true,
+            CURLOPT_POSTFIELDS=>json_encode(['validate_only'=>$validateOnly, 'events'=>[$event]], JSON_THROW_ON_ERROR),
+            CURLOPT_HTTPHEADER=>['Authorization: Bearer '.$this->config['api_key'], 'Content-Type: application/json'],
+            CURLOPT_RETURNTRANSFER=>true, CURLOPT_TIMEOUT=>10, CURLOPT_CONNECTTIMEOUT=>3,
+            CURLOPT_SSL_VERIFYPEER=>true, CURLOPT_SSL_VERIFYHOST=>2]);
+        $body = curl_exec($ch);
+        $http = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_errno($ch);
+        curl_close($ch);
+        $ok = $error === 0 && $http >= 200 && $http < 300;
+        $decoded = is_string($body) ? json_decode($body, true) : null;
+        if (is_array($decoded) && (!empty($decoded['error']) || !empty($decoded['errors']) || ($decoded['success'] ?? true) === false)) $ok = false;
+        // No registrar cuerpos, cabeceras, referencias ni hashes personales.
+        return ['ok'=>$ok, 'retry'=>$error !== 0 || $http === 429 || $http === 408 || $http >= 500,
+            'http'=>$http, 'result'=>$ok ? ($validateOnly ? 'validated' : 'accepted') : ($error ? 'transport_error' : 'api_rejected')];
     }
 }

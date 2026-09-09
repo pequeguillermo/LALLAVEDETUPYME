@@ -47,9 +47,9 @@ $imageOg = $ogImage ?? 'https://lallavedetupyme.com/assets/tierra.jpg';
   <script type="application/ld+json"><?= $schemaJson ?></script>
 <?php endif; ?>
 
-  <!-- Píxeles y analítica globales -->
-  <!-- OpenAI / ChatGPT Ads Pixel -->
-  <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"2atj5meVpvtJ5kCtqhG3yX",debug:true});</script>
+  <?php $adsConfig = (require dirname(__DIR__, 3) . '/config/app.php')['openai_ads']; ?>
+  <meta name="form-token" content="<?= htmlspecialchars($_SESSION['form_token'], ENT_QUOTES, 'UTF-8') ?>">
+  <script type="application/json" id="ads-config"><?= json_encode(['pixelId' => $adsConfig['pixel_id'], 'local' => in_array(strtolower(preg_replace('/:\d+$/', '', $_SERVER['HTTP_HOST'] ?? '')), ['localhost', '127.0.0.1', '::1'], true)], JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?></script>
 <?= $headExtra ?? '' ?>
 </head>
 <body class="<?= htmlspecialchars($bodyClass ?? '', ENT_QUOTES, 'UTF-8') ?>">

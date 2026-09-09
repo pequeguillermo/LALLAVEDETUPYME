@@ -74,7 +74,7 @@ $displayWhatsapp = $showWhatsapp ?? ($type !== 'none');
 <?php endif; ?>
 
 <?php if ($type !== 'none'): ?>
-  <script src="/app.js?v=20260904-2" defer></script>
+  <script src="/app.js?v=20260909-1" defer></script>
 <?php endif; ?>
 </body>
 </html>

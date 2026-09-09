@@ -10,6 +10,7 @@ if (PHP_SAPI === 'cli-server' && is_string($requestedPath)) {
     }
 }
 
+require_once dirname(__DIR__) . '/app/bootstrap.php';
 require_once dirname(__DIR__) . '/app/Models/Page.php';
 require_once dirname(__DIR__) . '/app/Controllers/SiteController.php';
 

@@ -17,9 +17,9 @@ $config = [
         'from_name' => 'Formulario web · La Llave de tu Pyme',
     ],
     'openai_ads' => [
-        'pixel_id' => '2atj5meVpvtJ5kCtqhG3yX',
-        'api_key' => (string) (getenv('OPENAI_ADS_API_KEY') ?: ''),
-        'endpoint' => 'https://bzr.openai.com/v1/events',
+        'pixel_id' => (string) (getenv('OPENAI_ADS_PIXEL_ID') ?: '2atj5meVpvtJ5kCtqhG3yX'),
+        'api_key' => (string) (getenv('OPENAI_ADS_CONVERSIONS_API_KEY') ?: getenv('OPENAI_ADS_API_KEY') ?: ''),
+        'database' => dirname(__DIR__) . '/storage/conversions.sqlite',
     ],
 ];
 
