@@ -17,6 +17,8 @@ final class Page
         '/servicios/automatizacion-y-funnels/' => 'service-automation.php',
         '/auditoria-marketing/' => 'audit.php',
         '/agencia-marketing-conversiones/' => 'conversion.php',
+        '/community-manager/' => 'community-manager.php',
+        '/gracias-community-manager/' => 'thanks-social.php',
         '/blog/' => 'blog.php',
         '/nosotros/' => 'about.php',
         '/contacto/' => 'contact.php',

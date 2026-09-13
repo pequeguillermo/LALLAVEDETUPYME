@@ -43,6 +43,7 @@ $displayWhatsapp = $showWhatsapp ?? ($type !== 'none');
         <a href="/servicios/posicionamiento-seo/">Posicionamiento SEO</a>
         <a href="/servicios/publicidad-digital/">Publicidad digital</a>
         <a href="/servicios/redes-sociales/">Redes y contenidos</a>
+        <a href="/community-manager/">Planes de community manager</a>
         <a href="/servicios/automatizacion-y-funnels/">Automatización y funnels</a>
       </div>
       <div>
@@ -67,14 +68,14 @@ $displayWhatsapp = $showWhatsapp ?? ($type !== 'none');
 <?php endif; ?>
 
 <?php if ($displayWhatsapp): ?>
-  <a class="whatsapp-float" href="https://wa.me/34611458493?text=Hola%2C%20quiero%20hablar%20sobre%20el%20marketing%20de%20mi%20empresa." target="_blank" rel="noopener noreferrer" aria-label="Hablar con La Llave de tu Pyme por WhatsApp">
+  <a class="whatsapp-float" href="https://wa.me/34611458493?text=<?= rawurlencode($whatsappMessage ?? 'Hola, quiero hablar sobre el marketing de mi empresa.') ?>" target="_blank" rel="noopener noreferrer" aria-label="Hablar con La Llave de tu Pyme por WhatsApp">
     <span class="whatsapp-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 4a11 11 0 0 0-9.5 16.5L5 27l6.7-1.4A11 11 0 1 0 16 4Z"/><path d="M12.2 10.4c.4-.3.8-.2 1 .3l1.1 2.5c.2.4.1.7-.2 1l-.8.8c1 2.1 2.5 3.6 4.7 4.6l.8-.9c.3-.3.7-.4 1-.2l2.4 1.2c.5.2.6.6.4 1-.6 1.5-1.8 2.3-3.3 2.2-5.3-.5-9.7-4.8-10.1-10.1-.1-1.1.8-2 3-2.4Z"/></svg></span>
     <span><small>Estamos al otro lado</small><strong><span class="wa-desktop-label">Hablemos por WhatsApp</span><span class="wa-mobile-label">WhatsApp</span></strong></span>
   </a>
 <?php endif; ?>
 
 <?php if ($type !== 'none'): ?>
-  <script src="/app.js?v=20260909-1" defer></script>
+  <script src="/app.js?v=20260913-1" defer></script>
 <?php endif; ?>
 </body>
 </html>

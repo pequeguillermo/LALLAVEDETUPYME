@@ -28,7 +28,8 @@ final class SiteController
         if ($path !== '/' && !str_ends_with($path, '/')) {
             $canonicalPath = $path . '/';
             if (Page::viewFor($canonicalPath) !== null) {
-                header('Location: ' . $canonicalPath, true, 301);
+                $query = parse_url($requestUri, PHP_URL_QUERY);
+                header('Location: ' . $canonicalPath . (is_string($query) && $query !== '' ? '?' . $query : ''), true, 301);
                 return;
             }
         }

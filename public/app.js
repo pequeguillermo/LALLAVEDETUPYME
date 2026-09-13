@@ -197,7 +197,8 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.message || "No hemos podido enviar tu solicitud.");
-      window.location.assign("/gracias/");
+      const destination = ["/gracias/", "/gracias-community-manager/"].includes(data.redirect) ? data.redirect : "/gracias/";
+      window.location.assign(destination);
     } catch (error) {
       submitting = false;
       if (feedback) {
@@ -218,7 +219,17 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
   });
 });
 
-const conversionForm = document.querySelector(".conversion-page #diagnostico");
+document.querySelectorAll("[data-social-plan]").forEach((link) => {
+  link.addEventListener("click", () => {
+    const select = document.getElementById("social-plan");
+    if (select && [...select.options].some((option) => option.value === link.dataset.socialPlan)) {
+      select.value = link.dataset.socialPlan;
+      select.removeAttribute("aria-invalid");
+    }
+  });
+});
+
+const conversionForm = document.querySelector(".conversion-page #diagnostico, .social-page #activar-redes");
 if (conversionForm && "IntersectionObserver" in window) {
   const formObserver = new IntersectionObserver(([entry]) => {
     document.body.classList.toggle("form-in-view", entry.isIntersecting);

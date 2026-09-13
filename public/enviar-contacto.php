@@ -12,14 +12,14 @@ header('Referrer-Policy: strict-origin-when-cross-origin');
 
 $wantsJson = str_contains(strtolower((string) ($_SERVER['HTTP_ACCEPT'] ?? '')), 'application/json');
 
-function respond(int $status, string $message, bool $wantsJson): never
+function respond(int $status, string $message, bool $wantsJson, string $destination = '/gracias/'): never
 {
     http_response_code($status);
     if ($wantsJson) {
         header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(['message' => $message], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        echo json_encode(['message' => $message, 'redirect' => $destination], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     } elseif ($status >= 200 && $status < 300) {
-        header('Location: /gracias/', true, 303);
+        header('Location: ' . $destination, true, 303);
     } else {
         header('Content-Type: text/html; charset=utf-8');
         echo '<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>No se ha podido enviar</title><body><main><h1>No se ha podido enviar</h1><p>'
@@ -45,7 +45,9 @@ try {
     $store = new ConversionStore($config['openai_ads']['database']);
     $previous = $store->find($token);
     if ($previous !== null && !in_array($previous['status'], ['receiving', 'mail_failed'], true)) {
-        respond(200, 'Solicitud ya recibida.', $wantsJson);
+        $previousContact = json_decode($previous['contact'], true);
+        $destination = ($previousContact['origin'] ?? '') === 'Community Manager' ? '/gracias-community-manager/' : '/gracias/';
+        respond(200, 'Solicitud ya recibida.', $wantsJson, $destination);
     }
     if ($previous !== null && $previous['status'] === 'receiving') {
         respond(409, 'Tu solicitud está guardada y pendiente de confirmar. Escríbenos si no recibes respuesta.', $wantsJson);
@@ -72,8 +74,29 @@ $website = $value('web');
 $blocker = $value('bloqueo');
 $challenge = $value('reto');
 $origin = $value('origen');
+$isSocial = $origin === 'Community Manager';
+$destination = $isSocial ? '/gracias-community-manager/' : '/gracias/';
+$plans = [
+    'presencia' => 'Presencia · 99 €/mes + IVA · Publicación cada 15 días',
+    'impulso' => 'Impulso · 199 €/mes + IVA · Publicación semanal y difusión en grupos',
+    'asesoramiento' => 'Necesita orientación para elegir un plan',
+];
+$plan = $isSocial ? ($plans[$value('plan')] ?? '') : '';
+$campaign = [];
+if ($isSocial) {
+    if ($plan === '' || $company === '') {
+        respond(422, 'Indica tu negocio y selecciona un plan o la opción de orientación.', $wantsJson);
+    }
+    foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'] as $utm) {
+        $campaignValue = $value($utm);
+        if (mb_strlen($campaignValue, 'UTF-8') > 150) {
+            respond(422, 'La información de campaña no es válida. Vuelve a abrir el formulario.', $wantsJson);
+        }
+        if ($campaignValue !== '') $campaign[$utm] = $campaignValue;
+    }
+}
 
-if ($name === '' || $email === '' || ($challenge === '' && $blocker === '') || empty($_POST['privacidad'])) {
+if ($name === '' || $email === '' || (!$isSocial && $challenge === '' && $blocker === '') || empty($_POST['privacidad'])) {
     respond(422, 'Revisa los campos obligatorios y acepta la política de privacidad.', $wantsJson);
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -109,7 +132,8 @@ $html = '<!doctype html><html lang="es"><body style="margin:0;background:#f3f0e9
     . '<div style="background:#080808;color:#fff;padding:24px 30px"><h1 style="margin:0;font-size:22px">Nueva solicitud desde La Llave de tu Pyme</h1></div>'
     . '<div style="padding:28px 30px">'
     . $row('Nombre', $name) . $row('Empresa', $company) . $row('Correo', $email) . $row('Teléfono', $phone)
-    . $row('Web', $website) . $row('Bloqueo principal', $blocker) . $row('Origen', $origin)
+    . $row('Web', $website) . $row('Bloqueo principal', $blocker) . $row('Origen', $origin) . $row('Plan solicitado', $plan)
+    . ($campaign === [] ? '' : $row('Campaña', http_build_query($campaign, '', ' | ')))
     . '<p><strong>Fecha:</strong> ' . date('d/m/Y H:i') . '</p>'
     . ($challenge === '' ? '' : '<h2 style="font-size:17px;margin-top:25px">Contexto</h2><div style="background:#fff4ec;border-left:4px solid #ff5c1a;padding:16px;white-space:pre-wrap">' . $safe($challenge) . '</div>')
     . '<p style="font-size:12px;color:#666;margin-top:25px">La persona ha aceptado la política de privacidad para recibir respuesta a esta solicitud.</p>'
@@ -124,7 +148,7 @@ $event = $consented ? OpenAiAdsTracker::event($id, $timestamp, $email,
     $reference($_POST['oppref'] ?? null), $reference($_COOKIE['__obref'] ?? null)) : null;
 try {
     if ($previous === null) {
-        $store->save($token, compact('name', 'company', 'email', 'phone', 'website', 'blocker', 'challenge', 'origin'), $event, $id, $timestamp);
+        $store->save($token, compact('name', 'company', 'email', 'phone', 'website', 'blocker', 'challenge', 'origin', 'plan', 'campaign'), $event, $id, $timestamp);
     } else {
         // Un fallo explícito de correo permite reintentar con el mismo UUID y fecha.
         $q = $store->db->prepare("UPDATE submissions SET status='receiving', event=? WHERE token=?");
@@ -150,6 +174,6 @@ try {
 }
 $_SESSION['last_contact_submission'] = time();
 $_SESSION['submission_tokens'][] = $token;
-$_SESSION['confirmation'] = ['eventId' => $id, 'consented' => $consented, 'expires' => time() + 600];
+$_SESSION['confirmation'] = ['eventId' => $id, 'consented' => $consented, 'expires' => time() + 600, 'destination' => $destination];
 $_SESSION['form_token'] = bin2hex(random_bytes(32));
-respond(200, 'Gracias. Hemos recibido tu solicitud.', $wantsJson);
+respond(200, 'Gracias. Hemos recibido tu solicitud.', $wantsJson, $destination);

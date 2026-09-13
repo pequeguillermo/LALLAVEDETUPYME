@@ -5,8 +5,8 @@ $robots = 'noindex,follow';
 $canonical = 'https://lallavedetupyme.com/gracias/';
 $schemaJson = '[{"@context":"https://schema.org","@type":"Organization","name":"La Llave de tu Pyme","url":"https://lallavedetupyme.com","logo":"https://lallavedetupyme.com/assets/logo-la-llave.png","description":"Agencia de marketing digital para pymes: estrategia, web, SEO, publicidad, contenidos y automatización bajo una misma dirección."},{"@context":"https://schema.org","@type":"WebPage","name":"Gracias | La Llave de tu Pyme","url":"https://lallavedetupyme.com/gracias/"}]';
 $confirmation = $_SESSION['confirmation'] ?? null;
-unset($_SESSION['confirmation']);
-$confirmed = is_array($confirmation) && ($confirmation['expires'] ?? 0) >= time();
+$confirmed = is_array($confirmation) && ($confirmation['destination'] ?? '/gracias/') === '/gracias/' && ($confirmation['expires'] ?? 0) >= time();
+if ($confirmed) unset($_SESSION['confirmation']);
 $headExtra = $confirmed
     ? '<script type="application/json" id="confirmed-lead">' . json_encode($confirmation, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) . '</script>'
     : '';
