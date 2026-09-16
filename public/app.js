@@ -26,6 +26,10 @@ function loadMetaPixel() {
   window.fbq('init', metaPixelId);
   window.fbq('track', 'PageView');
   metaPixelStarted = true;
+  // Esta URL es el disparador del evento de Meta, también en acceso directo.
+  if (window.location.pathname === "/gracias-community-manager/") {
+    window.fbq('track', 'CompleteRegistration');
+  }
 }
 
 function captureAttribution() {
@@ -88,11 +92,6 @@ function trackConfirmedLead() {
   loadMetaPixel();
   if (confirmedLead?.consented && confirmedLead.expires * 1000 >= Date.now()) {
     window.gtag?.("event", "generate_lead", { form_destination: "contacto_web" });
-    if (metaPixelStarted
-        && window.location.pathname === "/gracias-community-manager/"
-        && confirmedLead.destination === "/gracias-community-manager/") {
-      window.fbq('track', 'CompleteRegistration');
-    }
   }
   confirmedLead = null;
 }
