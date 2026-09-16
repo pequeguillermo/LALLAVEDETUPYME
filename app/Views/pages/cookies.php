@@ -21,13 +21,16 @@ require dirname(__DIR__) . '/partials/header.php';
       <p>El sitio guarda tu elección en el almacenamiento local del navegador con la clave <strong>llave_cookie_consent</strong>. Puedes cambiarla cuando quieras:</p>
       <p><button class="cookie-settings" type="button" data-cookie-settings>Revisar mi elección</button></p>
       <p>Más información sobre el tratamiento de Google en su <a href="https://policies.google.com/privacy?hl=es" target="_blank" rel="noopener noreferrer">política de privacidad</a>.</p>
+      <h3>Medición de Meta (Facebook e Instagram)</h3>
+      <p>Si aceptas, activamos el píxel de Meta para medir visitas y la recepción de solicitudes de community manager mediante el evento CompleteRegistration. Este evento sólo se envía al confirmar una solicitud en la página de gracias correspondiente; no se vuelve a enviar al recargarla ni al abrirla directamente. Meta recibe información técnica del navegador y de la página visitada para medir la respuesta a los anuncios y puede utilizar cookies como _fbp y _fbc para la atribución publicitaria.</p>
+      <p>El píxel no se carga antes de aceptar. Puedes retirar el consentimiento desde «Revisar mi elección». Más información en la <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener noreferrer">política de privacidad de Meta</a> y su <a href="https://www.facebook.com/privacy/policies/cookies/" target="_blank" rel="noopener noreferrer">política de cookies</a>.</p>
       <h2>4. Servicios y enlaces de terceros</h2>
       <p>La web contiene enlaces a servicios externos, como WhatsApp, y al blog. Al seguirlos accedes a páginas gestionadas por terceros, que pueden aplicar sus propias políticas de cookies.</p>
       <h2>5. Configuración del navegador</h2>
       <p>Puedes bloquear o eliminar cookies desde la configuración de tu navegador. Si bloqueas la cookie técnica, algunas medidas de protección del formulario podrían no funcionar correctamente.</p>
       <h2>6. Cambios en esta política</h2>
       <p>Si en el futuro se incorporan herramientas de publicidad u otras cookies no necesarias, se actualizará esta información y se solicitará el consentimiento antes de activarlas.</p>
-      <p class="legal-updated">Última actualización: 4 de septiembre de 2026.</p>
+      <p class="legal-updated">Última actualización: 16 de septiembre de 2026.</p>
     </div></section>
   <section class="section"><div class="container legal-copy"><h2>Medición de Google y ChatGPT Ads</h2><p>Sólo con tu consentimiento cargamos las herramientas de Google y OpenAI para medir visitas y solicitudes. Al confirmar un formulario, el navegador y el servidor utilizan el mismo identificador para evitar contar dos veces la conversión. Podemos enviar a OpenAI referencias de atribución (oppref y la cookie __obref) y el hash SHA-256 de tu correo, sin enviar el correo en texto claro.</p><p>La preferencia se guarda durante seis meses en la cookie llave_cookie_consent y en el almacenamiento local. La referencia oppref se conserva durante la sesión de navegación sólo cuando aceptas. Puedes cambiar tu elección desde «Revisar mi elección». Al rechazar se detienen las mediciones futuras y se cancelan los eventos pendientes de tu sesión que aún no se hayan enviado.</p></div></section></main>
 <?php

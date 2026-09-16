@@ -25,11 +25,11 @@ require dirname(__DIR__) . '/partials/header.php';
       <h2>6. Derechos</h2>
       <p>Puedes solicitar el acceso, rectificación, supresión, oposición, limitación o portabilidad de tus datos, así como retirar tu consentimiento, escribiendo a <a href="mailto:info@lallavedetupyme.com">info@lallavedetupyme.com</a>. Incluye información suficiente para identificar tu solicitud.</p>
       <p>También puedes presentar una reclamación ante la Agencia Española de Protección de Datos en <a href="https://www.aepd.es/" target="_blank" rel="noopener noreferrer">aepd.es</a>.</p>
-      <h2>7. Analítica</h2>
-      <p>Si aceptas las cookies de analítica, utilizamos Google Analytics para medir el uso del sitio y las solicitudes confirmadas. Puedes rechazar esta medición y seguir utilizando la web. Encontrarás el detalle y podrás revisar tu elección en la <a href="/politica-de-cookies/">política de cookies</a>.</p>
+      <h2>7. Analítica y medición publicitaria</h2>
+      <p>Si aceptas las cookies de analítica y medición publicitaria, utilizamos Google Analytics, ChatGPT Ads y el píxel de Meta (Facebook e Instagram) para medir el uso del sitio y las solicitudes confirmadas. En Meta registramos como CompleteRegistration las solicitudes de community manager confirmadas. Puedes rechazar esta medición y seguir utilizando la web. Encontrarás el detalle y podrás revisar tu elección en la <a href="/politica-de-cookies/">política de cookies</a>.</p>
       <h2>8. Decisiones automatizadas</h2>
       <p>No tomamos decisiones automatizadas ni elaboramos perfiles a partir de los datos enviados en los formularios de esta web.</p>
-      <p class="legal-updated">Última actualización: 4 de septiembre de 2026.</p>
+      <p class="legal-updated">Última actualización: 16 de septiembre de 2026.</p>
     </div></section>
   </main>
 <?php

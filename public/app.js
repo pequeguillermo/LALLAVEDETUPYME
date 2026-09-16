@@ -1,8 +1,33 @@
 const analyticsId = "GT-WRGZMMBM";
+const metaPixelId = "1010603668160172";
 const consentStorageKey = "llave_cookie_consent";
 const adsConfig = JSON.parse(document.getElementById("ads-config")?.textContent || "{}");
 let confirmedLead = JSON.parse(document.getElementById("confirmed-lead")?.textContent || "null");
 let pixelStarted = false;
+let metaPixelStarted = false;
+
+function loadMetaPixel() {
+  if (readConsent() !== "accept" || adsConfig.local) return;
+  if (metaPixelStarted) {
+    window.fbq("consent", "grant");
+    return;
+  }
+
+  // Código base de Meta, activado únicamente después de aceptar las cookies.
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  window.fbq('consent', 'grant');
+  window.fbq('init', metaPixelId);
+  window.fbq('track', 'PageView');
+  metaPixelStarted = true;
+}
+
 function captureAttribution() {
   if (readConsent() !== "accept") return null;
   const value = new URLSearchParams(window.location.search).get("oppref");
@@ -46,6 +71,7 @@ function storeConsent(value) {
   if (value !== "accept") {
     confirmedLead = null;
     window.oaiq?.("consent", false);
+    window.fbq?.("consent", "revoke");
     try { sessionStorage.removeItem("llave_oppref"); } catch {}
     const token = document.querySelector('meta[name="form-token"]')?.content;
     if (token) fetch('/medicion-consentimiento.php', {
@@ -59,8 +85,14 @@ function storeConsent(value) {
 function trackConfirmedLead() {
   if (readConsent() !== "accept") return;
   loadPixel();
+  loadMetaPixel();
   if (confirmedLead?.consented && confirmedLead.expires * 1000 >= Date.now()) {
     window.gtag?.("event", "generate_lead", { form_destination: "contacto_web" });
+    if (metaPixelStarted
+        && window.location.pathname === "/gracias-community-manager/"
+        && confirmedLead.destination === "/gracias-community-manager/") {
+      window.fbq('track', 'CompleteRegistration');
+    }
   }
   confirmedLead = null;
 }
@@ -87,7 +119,7 @@ function showCookieNotice() {
   const notice = document.createElement("section");
   notice.className = "cookie-notice";
   notice.setAttribute("aria-label", "Preferencias de cookies");
-  notice.innerHTML = `<div><strong>Tu elección, sin letra pequeña.</strong><p>Usamos analítica y medición de anuncios de Google y ChatGPT sólo si las aceptas para saber qué páginas y campañas generan contactos. Puedes continuar sin ellas.</p><a href="/politica-de-cookies/">Ver política de cookies</a></div><div class="cookie-actions"><button type="button" data-cookie-choice="reject">Rechazar</button><button type="button" data-cookie-choice="accept">Aceptar</button></div>`;
+  notice.innerHTML = `<div><strong>Tu elección, sin letra pequeña.</strong><p>Usamos analítica y medición de anuncios de Google, ChatGPT y Meta (Facebook e Instagram) sólo si las aceptas para saber qué páginas y campañas generan contactos. Puedes continuar sin ellas.</p><a href="/politica-de-cookies/">Ver política de cookies</a></div><div class="cookie-actions"><button type="button" data-cookie-choice="reject">Rechazar</button><button type="button" data-cookie-choice="accept">Aceptar</button></div>`;
   document.body.appendChild(notice);
   notice.querySelectorAll("[data-cookie-choice]").forEach((button) => {
     button.addEventListener("click", () => {
