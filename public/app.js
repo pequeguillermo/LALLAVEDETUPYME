@@ -1,4 +1,4 @@
-const analyticsId = "GT-WRGZMMBM";
+﻿const analyticsId = "GT-WRGZMMBM";
 const metaPixelId = "1010603668160172";
 const consentStorageKey = "llave_cookie_consent";
 const adsConfig = JSON.parse(document.getElementById("ads-config")?.textContent || "{}");
@@ -228,7 +228,8 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.message || "No hemos podido enviar tu solicitud.");
-      const destination = ["/gracias/", "/gracias-community-manager/"].includes(data.redirect) ? data.redirect : "/gracias/";
+      const allowedDestinations = ["/gracias/", "/gracias-community-manager/", "/promoweb/gracias/", "/gracias-promoweb/"];
+      const destination = allowedDestinations.includes(data.redirect) ? data.redirect : (typeof data.redirect === "string" && data.redirect.startsWith("/") ? data.redirect : "/gracias/");
       window.location.assign(destination);
     } catch (error) {
       submitting = false;
@@ -260,7 +261,7 @@ document.querySelectorAll("[data-social-plan]").forEach((link) => {
   });
 });
 
-const conversionForm = document.querySelector(".conversion-page #diagnostico, .social-page #activar-redes");
+const conversionForm = document.querySelector(".conversion-page #diagnostico, .social-page #activar-redes, .promoweb-page #pedir-web");
 if (conversionForm && "IntersectionObserver" in window) {
   const formObserver = new IntersectionObserver(([entry]) => {
     document.body.classList.toggle("form-in-view", entry.isIntersecting);

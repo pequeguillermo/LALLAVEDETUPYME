@@ -46,7 +46,10 @@ try {
     $previous = $store->find($token);
     if ($previous !== null && !in_array($previous['status'], ['receiving', 'mail_failed'], true)) {
         $previousContact = json_decode($previous['contact'], true);
-        $destination = ($previousContact['origin'] ?? '') === 'Community Manager' ? '/gracias-community-manager/' : '/gracias/';
+        $prevOrigin = $previousContact['origin'] ?? '';
+        $destination = ($prevOrigin === 'PromoWeb' || $prevOrigin === 'Desarrollo Web')
+            ? '/promoweb/gracias/'
+            : (($prevOrigin === 'Community Manager') ? '/gracias-community-manager/' : '/gracias/');
         respond(200, 'Solicitud ya recibida.', $wantsJson, $destination);
     }
     if ($previous !== null && $previous['status'] === 'receiving') {
@@ -75,19 +78,24 @@ $blocker = $value('bloqueo');
 $challenge = $value('reto');
 $origin = $value('origen');
 $isSocial = $origin === 'Community Manager';
-$destination = $isSocial ? '/gracias-community-manager/' : '/gracias/';
+$isPromoWeb = $origin === 'PromoWeb' || $origin === 'Desarrollo Web';
+$destination = $isPromoWeb ? '/promoweb/gracias/' : ($isSocial ? '/gracias-community-manager/' : '/gracias/');
 $plans = [
     'presencia' => 'Presencia · 99 €/mes + IVA · Publicación cada 15 días',
     'impulso' => 'Impulso · 199 €/mes + IVA · Publicación semanal y difusión en grupos',
     'asesoramiento' => 'Necesita orientación para elegir un plan',
+    'promoweb' => 'Desarrollo Web Pyme · 400 € + IVA · Hosting 6 meses gratis',
 ];
-$plan = $isSocial ? ($plans[$value('plan')] ?? '') : '';
+$plan = $isSocial ? ($plans[$value('plan')] ?? '') : ($isPromoWeb ? $plans['promoweb'] : '');
 $campaign = [];
-if ($isSocial) {
-    if ($plan === '' || $company === '') {
+if ($isSocial || $isPromoWeb) {
+    if ($isSocial && ($plan === '' || $company === '')) {
         respond(422, 'Indica tu negocio y selecciona un plan o la opción de orientación.', $wantsJson);
     }
-    foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'] as $utm) {
+    if ($isPromoWeb && $company === '') {
+        respond(422, 'Indica el nombre de tu empresa o negocio.', $wantsJson);
+    }
+    foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'] as $utm) {
         $campaignValue = $value($utm);
         if (mb_strlen($campaignValue, 'UTF-8') > 150) {
             respond(422, 'La información de campaña no es válida. Vuelve a abrir el formulario.', $wantsJson);
@@ -96,13 +104,13 @@ if ($isSocial) {
     }
 }
 
-if ($name === '' || $email === '' || (!$isSocial && $challenge === '' && $blocker === '') || empty($_POST['privacidad'])) {
+if ($name === '' || $email === '' || (!$isSocial && !$isPromoWeb && $challenge === '' && $blocker === '') || empty($_POST['privacidad'])) {
     respond(422, 'Revisa los campos obligatorios y acepta la política de privacidad.', $wantsJson);
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(422, 'Introduce un correo electrónico válido.', $wantsJson);
 }
-if ($phone !== '' && !preg_match('/^[0-9+() .-]{7,30}$/', $phone)) {
+if ($phone !== '' && !preg_match('/^[0-9+() .\-]{7,30}$/', $phone)) {
     respond(422, 'Introduce un teléfono válido.', $wantsJson);
 }
 if ($website !== '' && !filter_var($website, FILTER_VALIDATE_URL)) {
@@ -159,7 +167,8 @@ try {
 }
 try {
     $mailer = new ContactMailer($config['mail'] ?? [], dirname(__DIR__) . '/storage/logs/contactos-local.log');
-    $mailer->send('Nueva solicitud web · ' . $name, $html, $email);
+    $subject = $isPromoWeb ? ('Nueva solicitud PromoWeb (400€) · ' . $name) : ($isSocial ? ('Nueva solicitud Community Manager · ' . $name) : ('Nueva solicitud web · ' . $name));
+    $mailer->send($subject, $html, $email);
 } catch (Throwable) {
     $q = $store->db->prepare("UPDATE submissions SET status='mail_failed' WHERE token=?");
     $q->execute([$token]);
