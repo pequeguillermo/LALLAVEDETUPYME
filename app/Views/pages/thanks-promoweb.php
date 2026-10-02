@@ -16,9 +16,23 @@ if ($confirmed) {
     unset($_SESSION['confirmation']);
 }
 
-$headExtra = '<link rel="stylesheet" href="/promoweb.css?v=20261001-1">';
+$googleAdsTransactionId = $confirmed && !empty($confirmation['eventId']) ? (string)$confirmation['eventId'] : '';
+
+$headExtra = '<link rel="stylesheet" href="/promoweb.css?v=20261001-1">' . "\n"
+    . '<!-- Event snippet for Compra conversion page -->' . "\n"
+    . '<script>' . "\n"
+    . '  window.dataLayer = window.dataLayer || [];' . "\n"
+    . '  function gtag(){dataLayer.push(arguments);}' . "\n"
+    . '  gtag(\'event\', \'conversion\', {' . "\n"
+    . '      \'send_to\': \'AW-18055513085/-oH8CK_WwJMcEP2HxaFD\',' . "\n"
+    . '      \'value\': 1.0,' . "\n"
+    . '      \'currency\': \'EUR\',' . "\n"
+    . '      \'transaction_id\': ' . json_encode($googleAdsTransactionId) . "\n"
+    . '  });' . "\n"
+    . '</script>';
+
 if ($confirmed) {
-    $headExtra .= '<script type="application/json" id="confirmed-lead">'
+    $headExtra .= "\n" . '<script type="application/json" id="confirmed-lead">'
         . json_encode($confirmation, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) . '</script>';
 }
 

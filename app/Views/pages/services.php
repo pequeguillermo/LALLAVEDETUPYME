@@ -75,49 +75,77 @@ require dirname(__DIR__) . '/partials/header.php';
           <span class="card-link">Ver servicio <span aria-hidden="true">↗</span></span>
         </a>
 
-        <!-- 07 HOSTING PARA PYMES: OCUPA LAS TRES COLUMNAS PARA QUE NO DESCUDRE -->
+        <!-- 07 HOSTING PARA PYMES: OCUPA LAS TRES COLUMNAS CON FORMATO ESTRUCTURADO -->
         <a class="service-card service-card-full" href="/servicios/hosting-para-pymes/" data-reveal>
-          <div class="service-card-full-main">
-            <div class="service-card-full-head">
-              <span class="service-number">07</span>
-              <span class="service-badge-pill">Infraestructura Crítica</span>
-            </div>
-            <div class="service-card-full-title-wrap">
-              <span class="service-icon">
-                <svg viewBox="0 0 48 48" aria-hidden="true">
-                  <rect x="6" y="8" width="36" height="12" rx="2"/>
-                  <rect x="6" y="24" width="36" height="12" rx="2"/>
-                  <circle cx="12" cy="14" r="1.5"/>
-                  <circle cx="17" cy="14" r="1.5"/>
-                  <circle cx="12" cy="30" r="1.5"/>
-                  <circle cx="17" cy="30" r="1.5"/>
-                  <path d="M30 14h8M30 30h8M24 38v4M16 42h16"/>
-                </svg>
-              </span>
-              <div>
-                <h3>Hosting para pymes</h3>
-                <p>La base donde descansa tu negocio: servidores de alta disponibilidad optimizados para que tu web vuele y nunca deje de responder.</p>
+          <div class="service-full-top">
+            <div class="service-full-header-info">
+              <div class="service-full-meta">
+                <span class="service-number">07</span>
+                <span class="service-badge-pill">Infraestructura Crítica</span>
+              </div>
+              <div class="service-full-title-row">
+                <span class="service-icon" aria-hidden="true">
+                  <svg viewBox="0 0 48 48" aria-hidden="true">
+                    <rect x="6" y="8" width="36" height="12" rx="2"/>
+                    <rect x="6" y="24" width="36" height="12" rx="2"/>
+                    <circle cx="12" cy="14" r="1.5"/>
+                    <circle cx="17" cy="14" r="1.5"/>
+                    <circle cx="12" cy="30" r="1.5"/>
+                    <circle cx="17" cy="30" r="1.5"/>
+                    <path d="M30 14h8M30 30h8M24 38v4M16 42h16"/>
+                  </svg>
+                </span>
+                <div>
+                  <h3>Hosting para pymes</h3>
+                  <p>La base donde descansa tu negocio: servidores de alto rendimiento optimizados para que tu web vuele y nunca deje de responder.</p>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="service-card-full-features">
-            <div class="full-feature">
-              <strong><span>🇪🇸</span> IP Española</strong>
-              <small>Respuesta ultrarrápida (&lt;0.2s) y máxima prioridad SEO local en Google.</small>
-            </div>
-            <div class="full-feature">
-              <strong><span>🛡️</span> Copias diarias y desubicadas</strong>
-              <small>Backups automáticos redundantes en centro de datos externo cifrado.</small>
-            </div>
-            <div class="full-feature">
-              <strong><span>⚡</span> Sobredimensionados y sin caídas</strong>
-              <small>Recursos holgados NVMe con 99.9% de disponibilidad garantizada.</small>
+            <div class="service-full-action">
+              <span class="service-full-button">Ver servicio y características <span aria-hidden="true">↗</span></span>
             </div>
           </div>
 
-          <span class="card-link">Ver servicio y características <span aria-hidden="true">↗</span></span>
-        </a>
+          <div class="service-full-pillars">
+            <div class="service-pillar-card">
+              <div class="pillar-head">
+                <span class="pillar-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/>
+                  </svg>
+                </span>
+                <strong>IP 100% Española</strong>
+              </div>
+              <p>Centro de datos nacional con latencia ultrabaja (&lt;0.2s) y máxima prioridad para SEO local en Google.</p>
+            </div>
+
+            <div class="service-pillar-card">
+              <div class="pillar-head">
+                <span class="pillar-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M9 12l2 2 4-4"/>
+                  </svg>
+                </span>
+                <strong>Copias diarias y desubicadas</strong>
+              </div>
+              <p>Backups redundantes cada noche enviados cifrados a un centro de datos externo para recuperación inmediata.</p>
+            </div>
+
+            <div class="service-pillar-card">
+              <div class="pillar-head">
+                <span class="pillar-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
+                </span>
+                <strong>Sobredimensionados y sin caídas</strong>
+              </div>
+              <p>Recursos holgados de RAM y CPU en discos NVMe con disponibilidad del 99.9% ante picos de visitas.</p>
+            </div>
+          </div>
+        </a>a>
       </div>
     </div>
   </section>

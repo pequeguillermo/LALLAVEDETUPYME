@@ -1,4 +1,6 @@
 ﻿const analyticsId = "GT-WRGZMMBM";
+const googleAdsId = "AW-18055513085";
+const googleAdsConversionSendTo = "AW-18055513085/-oH8CK_WwJMcEP2HxaFD";
 const metaPixelId = "1010603668160172";
 const consentStorageKey = "llave_cookie_consent";
 const adsConfig = JSON.parse(document.getElementById("ads-config")?.textContent || "{}");
@@ -102,9 +104,10 @@ function loadAnalytics() {
     return;
   }
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag() { window.dataLayer.push(arguments); };
+  window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
   window.gtag("js", new Date());
   window.gtag("config", analyticsId, { anonymize_ip: true });
+  window.gtag("config", googleAdsId);
   const script = document.createElement("script");
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(analyticsId)}`;
