@@ -166,6 +166,21 @@ em { color: var(--orange); font-family: Georgia, serif; font-weight: 400; }
   border-color: rgba(255, 255, 255, 0.4);
   background: rgba(0, 0, 0, 0.25);
 }
+.service-card.service-card-full:hover {
+  color: #fff;
+  background: var(--orange);
+}
+.service-card.service-card-full:hover h3,
+.service-card.service-card-full:hover .service-number,
+.service-card.service-card-full:hover .full-feature strong,
+.service-card.service-card-full:hover .card-link,
+.service-card.service-card-full:hover .card-link span {
+  color: #fff;
+}
+.service-card.service-card-full:hover p,
+.service-card.service-card-full:hover .full-feature small {
+  color: rgba(255, 255, 255, 0.9);
+}
 .service-card-full-title-wrap {
   display: flex;
   align-items: flex-start;

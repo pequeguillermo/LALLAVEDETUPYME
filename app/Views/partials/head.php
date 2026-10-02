@@ -42,7 +42,7 @@ $imageOg = $ogImage ?? 'https://lallavedetupyme.com/assets/tierra.jpg';
   <meta name="theme-color" content="#080808">
   <link rel="icon" href="/assets/logo-la-llave.png">
   <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/styles.css?v=20260904-7">
+  <link rel="stylesheet" href="/styles.css?v=20261002-2">
 <?php if (!empty($schemaJson)): ?>
   <script type="application/ld+json"><?= $schemaJson ?></script>
 <?php endif; ?>
