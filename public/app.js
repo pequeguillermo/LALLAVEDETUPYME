@@ -1,6 +1,7 @@
 ﻿const analyticsId = "GT-WRGZMMBM";
 const googleAdsId = "AW-18055513085";
 const googleAdsConversionSendTo = "AW-18055513085/-oH8CK_WwJMcEP2HxaFD";
+const googleAdsWhatsappConversionSendTo = "AW-18055513085/88KGCKyz5I0dEP2HxaFD";
 const metaPixelId = "1010603668160172";
 const consentStorageKey = "llave_cookie_consent";
 const adsConfig = JSON.parse(document.getElementById("ads-config")?.textContent || "{}");
@@ -139,9 +140,18 @@ function loadAnalytics() {
 document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"], a[href^="tel:"]').forEach((link) => {
   link.addEventListener("click", () => {
     if (readConsent() !== "accept" || adsConfig.local) return;
-    window.gtag?.("event", link.getAttribute("href").startsWith("tel:") ? "click_phone" : "click_whatsapp", {
+    const isPhone = link.getAttribute("href").startsWith("tel:");
+    window.gtag?.("event", isPhone ? "click_phone" : "click_whatsapp", {
       page_path: location.pathname,
     });
+    if (!isPhone) {
+      // Ads mide el clic en el enlace; no acredita una conversación ni un formulario.
+      window.gtag?.("event", "conversion", {
+        send_to: googleAdsWhatsappConversionSendTo,
+        value: 0,
+        currency: "EUR",
+      });
+    }
   });
 });
 
