@@ -74,6 +74,7 @@ function readConsent() {
 
 function storeConsent(value) {
   document.cookie = "llave_cookie_consent=" + value + "; Path=/; Max-Age=15552000; SameSite=Lax" + (location.protocol === "https:" ? "; Secure" : "");
+  window.gtag?.("consent", "update", googleConsent(value === "accept"));
   if (value !== "accept") {
     confirmedLead = null;
     window.oaiq?.("consent", false);
@@ -89,22 +90,41 @@ function storeConsent(value) {
 }
 
 function trackConfirmedLead() {
-  if (readConsent() !== "accept") return;
+  if (readConsent() !== "accept" || adsConfig.local) return;
   loadPixel();
   loadMetaPixel();
-  if (confirmedLead?.consented && confirmedLead.expires * 1000 >= Date.now()) {
-    window.gtag?.("event", "generate_lead", { form_destination: "contacto_web" });
+  if (confirmedLead?.consented && confirmedLead.eventId && confirmedLead.expires * 1000 >= Date.now()) {
+    const isPromoWeb = ["/promoweb/gracias/", "/gracias-promoweb/"].includes(confirmedLead.destination);
+    window.gtag?.("event", "generate_lead", {
+      form_destination: isPromoWeb ? "promoweb" : confirmedLead.destination === "/gracias-community-manager/" ? "community_manager" : "contacto_web",
+    });
+    if (isPromoWeb) {
+      window.gtag?.("event", "conversion", {
+        send_to: googleAdsConversionSendTo,
+        value: 0,
+        currency: "EUR",
+        transaction_id: confirmedLead.eventId,
+      });
+    }
   }
   confirmedLead = null;
 }
 
+function googleConsent(accepted) {
+  const state = accepted ? "granted" : "denied";
+  return { analytics_storage: state, ad_storage: state, ad_user_data: state, ad_personalization: state };
+}
+
 function loadAnalytics() {
+  if (readConsent() !== "accept" || adsConfig.local) return;
   if (document.querySelector(`script[data-analytics-id="${analyticsId}"]`)) {
     trackConfirmedLead();
     return;
   }
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
+  window.gtag("consent", "default", googleConsent(false));
+  window.gtag("consent", "update", googleConsent(true));
   window.gtag("js", new Date());
   window.gtag("config", analyticsId, { anonymize_ip: true });
   window.gtag("config", googleAdsId);
@@ -115,6 +135,15 @@ function loadAnalytics() {
   document.head.appendChild(script);
   trackConfirmedLead();
 }
+
+document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"], a[href^="tel:"]').forEach((link) => {
+  link.addEventListener("click", () => {
+    if (readConsent() !== "accept" || adsConfig.local) return;
+    window.gtag?.("event", link.getAttribute("href").startsWith("tel:") ? "click_phone" : "click_whatsapp", {
+      page_path: location.pathname,
+    });
+  });
+});
 
 function showCookieNotice() {
   if (document.querySelector(".cookie-notice")) return;
