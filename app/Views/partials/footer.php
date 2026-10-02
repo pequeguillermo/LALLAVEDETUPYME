@@ -45,6 +45,7 @@ $displayWhatsapp = $showWhatsapp ?? ($type !== 'none');
         <a href="/servicios/redes-sociales/">Redes y contenidos</a>
         <a href="/community-manager/">Planes de community manager</a>
         <a href="/servicios/automatizacion-y-funnels/">Automatización y funnels</a>
+        <a href="/servicios/hosting-para-pymes/">Hosting para pymes</a>
       </div>
       <div>
         <p class="footer-label">Agencia</p>

@@ -15,6 +15,8 @@ final class Page
         '/servicios/publicidad-digital/' => 'service-ads.php',
         '/servicios/redes-sociales/' => 'service-social.php',
         '/servicios/automatizacion-y-funnels/' => 'service-automation.php',
+        '/servicios/hosting-para-pymes/' => 'service-hosting.php',
+        '/servicios/hosting/' => 'service-hosting.php',
         '/auditoria-marketing/' => 'audit.php',
         '/agencia-marketing-conversiones/' => 'conversion.php',
         '/community-manager/' => 'community-manager.php',
