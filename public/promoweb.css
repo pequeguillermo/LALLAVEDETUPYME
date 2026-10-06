@@ -1100,3 +1100,26 @@
     justify-content: center;
   }
 }
+/* Solicitud visible junto a la oferta: revisión local del 06/10/2026. */
+.promoweb-hero-grid { align-items: start; }
+.hero-contact-card { scroll-margin-top: 105px; padding: 28px; }
+.hero-contact-card h2 { font-size: 1.6rem; margin-bottom: 20px; color: #fff; }
+.hero-contact-card .privacy-summary { color: #a7b1c3; }
+.hero-contact-card .privacy-summary strong { color: #dce2eb; }
+.hero-contact-card .form-row { align-items: end; }
+.hero-contact-card .form-security-seal { align-items: flex-start; }
+.hero-contact-card .form-security-seal svg { flex-shrink: 0; }
+.form-optional-details { margin-bottom: 18px; }
+.form-optional-details summary { color: var(--paper-muted); font-size: .86rem; cursor: pointer; }
+.form-optional-details[open] summary { margin-bottom: 18px; }
+.contact-closing { grid-template-columns: 1fr; max-width: 800px; }
+.contact-closing .button { margin-bottom: 26px; }
+@media (max-width: 600px) {
+  .promoweb-hero { padding-top: 115px; }
+  .promoweb-hero h1 { font-size: clamp(2.2rem, 9vw, 2.7rem); }
+  .hero-contact-card { padding: 24px 20px; }
+  .promoweb-badge-pulse { font-size: .65rem; }
+}
+
+.offer-table { min-width: 0; }
+.offer-table th[scope="row"] { text-align: left; font-weight: 600; }

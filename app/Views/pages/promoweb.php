@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-$title = 'Web Profesional para Pymes 400 € · Hosting 6 Meses Gratis | La Llave';
-$description = 'Desarrollo web profesional para pymes y autónomos por sólo 400 €. Incluye hosting gratis 6 meses (luego 150 €/año, antes 200 €) y configuración SEO técnico de élite con Jarvis.';
+$title = 'Diseño web para pymes por 400 € + IVA | La Llave de tu Pyme';
+$description = 'Diseño web para pymes y autónomos por 400 € + IVA, con hosting incluido durante 6 meses. Después, 150 €/año. Pide información sin compromiso.';
 $canonical = 'https://lallavedetupyme.com/promoweb/';
 $bodyClass = 'promoweb-page';
 $headerType = 'landing';
-$landingCtaText = 'Quiero mi web por 400 €';
+$landingCtaText = 'Pedir información';
 $landingCtaHref = '#pedir-web';
 $footerType = 'conversion';
 $whatsappMessage = 'Hola, vengo del anuncio de la web para pymes a 400€ con hosting gratis 6 meses y quiero información.';
-$headExtra = '<link rel="stylesheet" href="/promoweb.css?v=20261001-1">';
+$headExtra = '<link rel="stylesheet" href="/promoweb.css?v=20261006-1">';
 
 $schemaJson = json_encode([
     '@context' => 'https://schema.org',
@@ -46,10 +46,10 @@ require dirname(__DIR__) . '/partials/header.php';
   <section class="promoweb-hero">
     <div class="container promoweb-hero-grid">
       <div class="promoweb-hero-copy">
-        <span class="promoweb-badge-pulse">Campaña Exclusiva Pymes y Autónomos</span>
-        <h1>Tu web profesional por 400 €.<br><em>Rápida, a medida y lista para captar clientes.</em></h1>
-        <p class="hero-lead">Olvídate de presupuestos inflados de 2.000 € o de webs baratas de 300 € que parecen plantillas rotas. Creamos la web de tu negocio con diseño moderno, <strong>hosting profesional GRATIS durante 6 meses</strong> y la configuración técnica de <strong>Jarvis</strong> para que Google te encuentre desde el primer día.</p>
-        
+        <span class="promoweb-badge-pulse">Para pymes y autónomos</span>
+        <h1>Diseño web para pymes <br><em>por 400 € + IVA</em></h1>
+        <p class="hero-lead">Presenta tus servicios con una web profesional que se adapte al móvil y facilite el contacto con tu negocio. Incluye <strong>hosting durante 6 meses</strong> y la configuración SEO técnica inicial.</p>
+
         <div class="promoweb-hero-offer">
           <div class="hero-offer-tag">
             <span class="amount">400 €</span>
@@ -62,71 +62,100 @@ require dirname(__DIR__) . '/partials/header.php';
         </div>
 
         <div class="promoweb-hero-actions">
-          <a class="button" href="#pedir-web">Quiero mi web por 400 € <span aria-hidden="true">→</span></a>
+          <a class="button" href="#pedir-web">Pedir información sin compromiso <span aria-hidden="true">→</span></a>
           <a class="text-link" href="https://wa.me/34611458493?text=<?= rawurlencode($whatsappMessage) ?>" target="_blank" rel="noopener noreferrer">Prefiero preguntar por WhatsApp <span aria-hidden="true">↗</span></a>
         </div>
 
         <div class="promoweb-guarantee-note">
           <span><i>✓</i> 100% de tu propiedad</span>
           <span><i>✓</i> Sin permanencias</span>
-          <span><i>✓</i> Entrega en 10-15 días</span>
+          <span><i>✓</i> Entrega en 10–15 días laborables</span>
         </div>
       </div>
 
-      <!-- VISUAL BOARD / JARVIS PREVIEW -->
-      <figure class="promoweb-board" aria-label="Panel de control técnico y rendimiento garantizado con Jarvis">
-        <div class="promoweb-board-header">
-          <div class="board-window-dots">
-            <span></span><span></span><span></span>
-          </div>
-          <span class="board-jarvis-badge">Configuración Jarvis Activa</span>
-        </div>
+      <!-- FORMULARIO: solicitud sin compromiso junto a la oferta -->
+      <div class="contact-card-box hero-contact-card" id="pedir-web">
+        <span class="eyebrow">400 € + IVA · Sin compromiso</span>
+        <h2>Cuéntanos qué web necesitas</h2>
 
-        <div class="board-metrics-grid">
-          <div class="board-metric-card">
-            <span class="board-metric-label">Google PageSpeed</span>
-            <span class="board-metric-val score-good">99 / 100</span>
-            <small>Carga ultrarrápida &lt; 0.8s</small>
-          </div>
-          <div class="board-metric-card">
-            <span class="board-metric-label">Google Search Console</span>
-            <span class="board-metric-val score-good">Indexada</span>
-            <small>Sitemap enviado y verificado</small>
-          </div>
-          <div class="board-metric-card">
-            <span class="board-metric-label">Medición GA4</span>
-            <span class="board-metric-val">100% Activa</span>
-            <small>Llamadas, WhatsApp y Leads</small>
-          </div>
-          <div class="board-metric-card">
-            <span class="board-metric-label">Seguridad SSL</span>
-            <span class="board-metric-val score-good">HTTPS A+</span>
-            <small>Certificado seguro incluido</small>
-          </div>
-        </div>
+        <form class="promoweb-form lead-form" action="/enviar-contacto.php" method="post" data-contact-form>
+          <input type="hidden" name="origen" value="PromoWeb">
+          <input type="hidden" name="submission_token" value="<?= htmlspecialchars($_SESSION['form_token'], ENT_QUOTES, 'UTF-8') ?>">
 
-        <ul class="board-jarvis-checklist">
-          <li>
-            <span>Estructura semántica Schema.org para Google</span>
-            <span class="status-ok"><i>✓</i> Optimizado</span>
-          </li>
-          <li>
-            <span>Formularios conectados y blindados contra spam</span>
-            <span class="status-ok"><i>✓</i> Verificado</span>
-          </li>
-          <li>
-            <span>Hosting SSD de alta velocidad incluido</span>
-            <span class="status-ok"><i>✓</i> 6 meses gratis</span>
-          </li>
-        </ul>
-      </figure>
+          <?php foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'] as $utm): ?>
+            <input type="hidden" name="<?= $utm ?>" value="<?= htmlspecialchars(is_string($_GET[$utm] ?? null) ? mb_substr($_GET[$utm], 0, 150) : '', ENT_QUOTES, 'UTF-8') ?>">
+          <?php endforeach; ?>
+
+          <!-- Honeypot -->
+          <label class="field-honeypot" aria-hidden="true" style="display:none;">
+            No rellenes este campo
+            <input type="text" name="sitio_web" tabindex="-1" autocomplete="off">
+          </label>
+
+          <div class="form-row">
+            <label>
+              <span>Tu nombre *</span>
+              <input type="text" name="nombre" autocomplete="given-name" required maxlength="100" placeholder="Ej. Carlos García">
+            </label>
+            <label>
+              <span>Nombre del negocio *</span>
+              <input type="text" name="empresa" autocomplete="organization" required maxlength="150" placeholder="Ej. Reformas García">
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              <span>Teléfono de contacto *</span>
+              <input type="tel" name="telefono" autocomplete="tel" required maxlength="30" pattern="[0-9+\(\) .\-]{7,30}" placeholder="Ej. 612 345 678">
+            </label>
+            <label>
+              <span>Correo electrónico *</span>
+              <input type="email" name="email" autocomplete="email" required maxlength="190" placeholder="tu@empresa.com">
+            </label>
+          </div>
+
+          <details class="form-optional-details">
+            <summary>Añadir información del proyecto (opcional)</summary>
+          <label>
+            <span>Web actual <small class="optional-label">Opcional (si ya tienes una y quieres renovarla)</small></span>
+            <input type="url" name="web" autocomplete="url" maxlength="300" placeholder="https://tuwebactual.com">
+          </label>
+
+          <label>
+            <span>¿A qué te dedicas o qué necesitas en tu web? <small class="optional-label">Opcional</small></span>
+            <textarea name="reto" rows="3" maxlength="3000" placeholder="Cuéntanos brevemente tu sector, tus servicios principales o dudas que tengas..."></textarea>
+          </label>
+
+          </details>
+
+          <p class="privacy-summary">
+            <strong>Protección de datos:</strong> La Llave de tu Pyme (Ideas Imaginativas) tratará tus datos para responder a tu solicitud web con tu consentimiento. No se cederán a terceros salvo obligación legal. Puedes ejercer tus derechos en info@lallavedetupyme.com. <a href="/politica-de-privacidad/" target="_blank" rel="noopener">Política de Privacidad</a>.
+          </p>
+
+          <label class="consent">
+            <input type="checkbox" name="privacidad" value="1" required>
+            <span>Acepto la política de privacidad y autorizo a que me contacten para informarme sobre la creación de mi página web.</span>
+          </label>
+
+          <button class="button" type="submit">
+            Pedir información sobre mi web <span aria-hidden="true">→</span>
+          </button>
+
+          <div class="form-security-seal">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            <span>Sin pago al enviar · Te respondemos en 24 horas laborables</span>
+          </div>
+
+          <div class="form-feedback" role="alert" aria-live="assertive" hidden></div>
+        </form>
+      </div>
     </div>
   </section>
 
   <!-- SIGNAL STRIP -->
   <div class="promoweb-signal">
     <div class="container">
-      <span>Entrega en <strong>10 a 15 días</strong></span>
+      <span>Entrega en <strong>10 a 15 días laborables</strong></span>
       <i aria-hidden="true"></i>
       <span>Hosting profesional <strong>6 meses gratis</strong></span>
       <i aria-hidden="true"></i>
@@ -140,35 +169,15 @@ require dirname(__DIR__) . '/partials/header.php';
   <section class="promoweb-pains">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">La realidad del mercado</span>
-        <h2>¿Por qué tantas webs de pymes<br><em>acaban siendo dinero tirado?</em></h2>
-        <p>Si ya has buscado presupuestos o has tenido malas experiencias antes, seguro que reconoces estas 4 trampas:</p>
+        <span class="eyebrow">Una web al servicio de tu negocio</span>
+        <h2>Explica lo que haces.<br><em>Facilita que te contacten.</em></h2>
+        <p>Una página clara para que tus clientes entiendan tus servicios y sepan cómo dar el siguiente paso.</p>
       </div>
-
       <div class="pains-grid">
-        <article class="pain-card">
-          <span class="pain-badge">Trampa 01</span>
-          <h3>La plantilla rota de 300 €</h3>
-          <p>Te instalan un WordPress prediseñado con 30 plugins lentos. Al mes falla, la web tarda 7 segundos en cargar y tus clientes se van antes de ver a qué te dedicas.</p>
-        </article>
-
-        <article class="pain-card">
-          <span class="pain-badge">Trampa 02</span>
-          <h3>La web "ciega" en Google</h3>
-          <p>Te entregan un diseño bonito pero nadie configura Google Search Console ni Analytics. Eres totalmente invisible en internet y no tienes ni idea de cuánta gente te contacta.</p>
-        </article>
-
-        <article class="pain-card">
-          <span class="pain-badge">Trampa 03</span>
-          <h3>Presupuestos de 2.000 € o atascos</h3>
-          <p>Agencias que te piden cifras desorbitadas o te meten en trámites burocráticos de 6 meses para entregarte una web básica donde eres un número de expediente más.</p>
-        </article>
-
-        <article class="pain-card">
-          <span class="pain-badge">Trampa 04</span>
-          <h3>Costes ocultos y secuestro</h3>
-          <p>Empresas que te ofrecen la web "barata" pero te clavan 80 €/mes en mantenimiento obligatorio, o no te dan las claves del servidor si decides marcharte.</p>
-        </article>
+        <article class="pain-card"><span class="pain-badge">01</span><h3>Presenta tus servicios</h3><p>Organizamos la información de tu negocio con un diseño adaptado a tu marca y textos fáciles de entender.</p></article>
+        <article class="pain-card"><span class="pain-badge">02</span><h3>Se adapta al móvil</h3><p>Tus clientes podrán consultar tu web y encontrar la forma de contactar desde su teléfono.</p></article>
+        <article class="pain-card"><span class="pain-badge">03</span><h3>Contacto a un clic</h3><p>Formulario, teléfono y WhatsApp visibles para quien quiera preguntarte por tus servicios.</p></article>
+        <article class="pain-card"><span class="pain-badge">04</span><h3>Condiciones claras</h3><p>400 € + IVA por la web y hosting incluido durante 6 meses. Después, 150 €/año. Revisamos contigo el alcance antes de contratar.</p></article>
       </div>
     </div>
   </section>
@@ -179,22 +188,22 @@ require dirname(__DIR__) . '/partials/header.php';
       <div class="section-head">
         <span class="eyebrow">El factor diferenciador</span>
         <h2>No te damos una web a ciegas.<br><em>La entregamos configurada con Jarvis.</em></h2>
-        <p>Cualquiera puede diseñar una web con colores bonitos. Nosotros nos aseguramos de que esté técnicamente construida para que Google la entienda y convierta visitas en llamadas.</p>
+        <p>Además del diseño, preparamos la estructura de tu web para los buscadores y configuramos la medición para revisar sus resultados.</p>
       </div>
 
       <div class="jarvis-lead-banner">
         <div class="jarvis-banner-icon">J</div>
         <div class="jarvis-banner-copy">
           <h3>¿Qué hace Jarvis por la web de tu negocio?</h3>
-          <p>Jarvis es nuestro motor de auditoría y supervisión técnica directa con las APIs de Google. En lugar de dejarte la web abandonada al terminar el diseño, aplicamos un protocolo exhaustivo de puesta a punto para que tu web arranque con ventaja competitiva.</p>
+          <p>Con Jarvis revisamos la configuración SEO y de medición durante la puesta en marcha. Así podemos detectar incidencias técnicas y dejar una base para el seguimiento de la web.</p>
         </div>
       </div>
 
       <div class="jarvis-pillars-grid">
         <article class="jarvis-pillar">
           <span class="pillar-number">Pilar 01</span>
-          <h4>Google Search Console impecable</h4>
-          <p>Configuramos y verificamos tu propiedad en Search Console. Generamos y enviamos tus sitemaps XML, solicitamos la indexación prioritaria y aseguramos que Google rastree tus páginas sin errores 404.</p>
+          <h4>Configuración de Google Search Console</h4>
+          <p>Configuramos la propiedad, enviamos el sitemap y comprobamos posibles incidencias de rastreo. La indexación y la posición en los resultados dependen de Google.</p>
           <ul class="jarvis-pillar-details">
             <li>Verificación directa DNS y propiedad limpia</li>
             <li>Sitemap XML dinámico enviado a Google</li>
@@ -204,19 +213,19 @@ require dirname(__DIR__) . '/partials/header.php';
 
         <article class="jarvis-pillar">
           <span class="pillar-number">Pilar 02</span>
-          <h4>Google Analytics 4 (GA4) con medición real</h4>
-          <p>Instalamos y calibramos GA4 con medición de eventos de conversión: sabrás exactamente cuántas personas hacen clic para llamarte, cuántas abren WhatsApp y cuántas rellenan tu formulario.</p>
+          <h4>Medición de formularios y clics de contacto</h4>
+          <p>Configuramos Analytics para medir los formularios confirmados y, por separado, los clics en teléfono y WhatsApp, cuando el visitante acepta la medición. Un clic no demuestra que haya una llamada o conversación.</p>
           <ul class="jarvis-pillar-details">
-            <li>Eventos de conversión: llamadas y WhatsApp</li>
+            <li>Clics en teléfono y WhatsApp diferenciados</li>
             <li>Seguimiento de formularios sin duplicados</li>
-            <li>Consentimiento RGPD integrado de serie</li>
+            <li>Medición sujeta al consentimiento de cookies</li>
           </ul>
         </article>
 
         <article class="jarvis-pillar">
           <span class="pillar-number">Pilar 03</span>
           <h4>SEO Técnico on-page y Schema.org</h4>
-          <p>Estructuramos tu código HTML5 semántico con datos estructurados Schema (LocalBusiness / Organization / Service). Google entenderá tu dirección, tu teléfono, tus servicios y tu horario sin confusiones.</p>
+          <p>Estructuramos tu código HTML5 semántico con datos estructurados Schema (LocalBusiness / Organization / Service). Estos datos ayudan a los buscadores a interpretar la información de tu negocio.</p>
           <ul class="jarvis-pillar-details">
             <li>Marcado Schema.org enriquecido</li>
             <li>Etiquetas Open Graph para redes sociales</li>
@@ -226,12 +235,12 @@ require dirname(__DIR__) . '/partials/header.php';
 
         <article class="jarvis-pillar">
           <span class="pillar-number">Pilar 04</span>
-          <h4>Velocidad Core Web Vitals al máximo</h4>
-          <p>Cero código basura ni maquetadores pesados. Tu web cargará en menos de 1 segundo en móviles y ordenadores, superando a tu competencia directa en los requisitos de experiencia de usuario de Google.</p>
+          <h4>Optimización del rendimiento</h4>
+          <p>Optimizamos el código y las imágenes y comprobamos el rendimiento. La velocidad varía según el contenido, el dispositivo y la conexión de cada visitante.</p>
           <ul class="jarvis-pillar-details">
-            <li>Puntuaciones PageSpeed de 95-100</li>
+            <li>Comprobación de rendimiento con PageSpeed</li>
             <li>Imágenes optimizadas de última generación</li>
-            <li>Experiencia móvil impecable y fluida</li>
+            <li>Revisión de la navegación en móvil</li>
           </ul>
         </article>
       </div>
@@ -242,57 +251,19 @@ require dirname(__DIR__) . '/partials/header.php';
   <section class="promoweb-compare">
     <div class="container">
       <div class="section-head">
-        <span class="eyebrow">Comparativa honesta</span>
-        <h2>Compara lo que te dan otros<br><em>frente a lo que te damos en La Llave</em></h2>
+        <span class="eyebrow">La oferta, punto por punto</span>
+        <h2>Qué incluye tu web<br><em>y cuáles son sus condiciones</em></h2>
       </div>
-
       <div class="table-wrapper">
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Concepto</th>
-              <th>Webs baratas (300-500 €)</th>
-              <th>Agencias grandes (1.500-3.000 €)</th>
-              <th class="col-highlight">La Llave de tu Pyme (400 €)</th>
-            </tr>
-          </thead>
+        <table class="compare-table offer-table">
+          <thead><tr><th scope="col">Concepto</th><th scope="col" class="col-highlight">Pack Web Pyme</th></tr></thead>
           <tbody>
-            <tr>
-              <td><strong>Precio desarrollo</strong></td>
-              <td>300 € – 500 €</td>
-              <td>1.500 € – 3.000 €</td>
-              <td class="col-highlight"><strong>400 €</strong> (precio cerrado)</td>
-            </tr>
-            <tr>
-              <td><strong>Hosting</strong></td>
-              <td class="compare-bad">No incluido (o te cobran aparte)</td>
-              <td>Incluido 1 año (luego 250 €+/año)</td>
-              <td class="col-highlight"><span class="compare-good">GRATIS 6 meses</span> · Luego 150 €/año (<s>200 €</s>)</td>
-            </tr>
-            <tr>
-              <td><strong>SEO Técnico (GSC + GA4)</strong></td>
-              <td class="compare-bad">Inexistente (web "a ciegas")</td>
-              <td>Servicio extra (+300 €)</td>
-              <td class="col-highlight"><span class="compare-good">Incluido con Jarvis</span></td>
-            </tr>
-            <tr>
-              <td><strong>Velocidad y optimización</strong></td>
-              <td class="compare-bad">Lenta (plantillas sobrecargadas)</td>
-              <td>Buena</td>
-              <td class="col-highlight"><span class="compare-good">Ultrarrápida (&lt;1s Core Web Vitals)</span></td>
-            </tr>
-            <tr>
-              <td><strong>Propiedad del código</strong></td>
-              <td class="compare-bad">A menudo secuestrado</td>
-              <td>Tuya</td>
-              <td class="col-highlight"><span class="compare-good">100% de tu propiedad sin ataduras</span></td>
-            </tr>
-            <tr>
-              <td><strong>Plazo de entrega</strong></td>
-              <td>Indefinido o abandonado</td>
-              <td>30 a 90 días</td>
-              <td class="col-highlight"><strong>10 a 15 días laborables</strong></td>
-            </tr>
+            <tr><th scope="row">Diseño y desarrollo</th><td class="col-highlight"><strong>400 € + IVA</strong> · Pago único</td></tr>
+            <tr><th scope="row">Hosting</th><td class="col-highlight">Incluido durante 6 meses; después, 150 €/año</td></tr>
+            <tr><th scope="row">Configuración inicial</th><td class="col-highlight">SEO técnico, Search Console y medición con Analytics</td></tr>
+            <tr><th scope="row">Móvil y rendimiento</th><td class="col-highlight">Diseño adaptable y optimización de imágenes y código</td></tr>
+            <tr><th scope="row">Propiedad de la web</th><td class="col-highlight">Tuya y sin permanencia</td></tr>
+            <tr><th scope="row">Plazo orientativo</th><td class="col-highlight">10–15 días laborables desde que acordamos la información del proyecto</td></tr>
           </tbody>
         </table>
       </div>
@@ -303,8 +274,8 @@ require dirname(__DIR__) . '/partials/header.php';
   <section class="promoweb-pack" id="que-incluye">
     <div class="container">
       <div class="pack-card">
-        <span class="pack-ribbon">Oferta Limitada Campaña</span>
-        
+        <span class="pack-ribbon">Hosting incluido 6 meses</span>
+
         <div class="pack-header">
           <div>
             <span class="eyebrow" style="color:var(--orange-hot);">Todo lo que necesitas para tu negocio</span>
@@ -338,7 +309,7 @@ require dirname(__DIR__) . '/partials/header.php';
             <span class="pack-check">✓</span>
             <div>
               <strong>Configuración Google Search Console completa</strong>
-              <p>Envío de sitemap, verificación limpia e indexación acelerada para que comiences a posicionar.</p>
+              <p>Verificación de la propiedad, envío de sitemap y revisión inicial del rastreo.</p>
             </div>
           </div>
 
@@ -346,7 +317,7 @@ require dirname(__DIR__) . '/partials/header.php';
             <span class="pack-check">✓</span>
             <div>
               <strong>Google Analytics 4 con medición de contactos</strong>
-              <p>Sabrás con certeza quién hace clic en tu teléfono, quién escribe por WhatsApp y quién envía formularios.</p>
+              <p>Medición de formularios confirmados y clics en teléfono y WhatsApp, separados y sujetos al consentimiento.</p>
             </div>
           </div>
 
@@ -378,13 +349,13 @@ require dirname(__DIR__) . '/partials/header.php';
             <span class="pack-check">✓</span>
             <div>
               <strong>Seguridad SSL (HTTPS) y textos legales RGPD</strong>
-              <p>Candado verde en el navegador y páginas de aviso legal, privacidad y cookies configuradas.</p>
+              <p>Conexión HTTPS y páginas de aviso legal, privacidad y cookies configuradas.</p>
             </div>
           </div>
         </div>
 
         <div style="text-align:center;">
-          <a class="button" href="#pedir-web" style="font-size:1.15rem; padding:18px 36px;">Quiero mi web por 400 € con hosting gratis <span aria-hidden="true">→</span></a>
+          <a class="button" href="#pedir-web" style="font-size:1.15rem; padding:18px 36px;">Pedir información sin compromiso <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </div>
@@ -442,7 +413,7 @@ require dirname(__DIR__) . '/partials/header.php';
 
         <details>
           <summary>¿Por qué Jarvis marca la diferencia frente a otros diseñadores?<span aria-hidden="true">+</span></summary>
-          <p>La inmensa mayoría de diseñadores crean una web y se desentienden de Google. Con Jarvis, configuramos técnicamente Search Console para verificar que Google rastree tus páginas, vinculamos Google Analytics 4 para que midas llamadas y WhatsApps reales, y estructuramos el código con datos Schema para que destaques en tu sector.</p>
+          <p>Con Jarvis revisamos el rastreo en Search Console, la configuración de Analytics y la estructura técnica de la web. Los formularios confirmados se distinguen de los clics en teléfono o WhatsApp. Esta configuración no garantiza posiciones en Google ni un número de clientes.</p>
         </details>
 
         <details>
@@ -464,12 +435,14 @@ require dirname(__DIR__) . '/partials/header.php';
   </section>
 
   <!-- LEAD FORM SECTION -->
-  <section class="promoweb-contact" id="pedir-web">
-    <div class="container contact-grid">
+  <section class="promoweb-contact">
+    <div class="container contact-grid contact-closing">
       <div class="contact-copy">
         <span class="eyebrow" style="color:var(--orange-hot);">Empieza hoy mismo</span>
-        <h2>Tu negocio merece<br>una web que <em>venda de verdad.</em></h2>
-        <p class="hero-lead">Rellena el formulario en 1 minuto. Te contactamos en menos de 24 horas laborables para revisar tu caso y poner en marcha tu web por 400 € con hosting gratuito 6 meses.</p>
+        <h2>Hablemos de la web<br><em>que necesita tu negocio.</em></h2>
+        <p class="hero-lead">Cuéntanos a qué se dedica tu negocio y revisaremos contigo el alcance de la web. La solicitud es gratuita y no implica contratar el servicio.</p>
+
+        <a class="button" href="#pedir-web">Pedir información sin compromiso <span aria-hidden="true">→</span></a>
 
         <ul class="contact-perks-list">
           <li><i>✓</i> <strong>Precio cerrado:</strong> 400 € + IVA sin costes sorpresa.</li>
@@ -484,77 +457,7 @@ require dirname(__DIR__) . '/partials/header.php';
         </div>
       </div>
 
-      <div class="contact-card-box">
-        <span class="eyebrow">Solicitud de proyecto web</span>
-        <h3>Pide tu web profesional</h3>
 
-        <form class="promoweb-form lead-form" action="/enviar-contacto.php" method="post" data-contact-form>
-          <input type="hidden" name="origen" value="PromoWeb">
-          <input type="hidden" name="submission_token" value="<?= htmlspecialchars($_SESSION['form_token'], ENT_QUOTES, 'UTF-8') ?>">
-          
-          <?php foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'] as $utm): ?>
-            <input type="hidden" name="<?= $utm ?>" value="<?= htmlspecialchars(is_string($_GET[$utm] ?? null) ? mb_substr($_GET[$utm], 0, 150) : '', ENT_QUOTES, 'UTF-8') ?>">
-          <?php endforeach; ?>
-
-          <!-- Honeypot -->
-          <label class="field-honeypot" aria-hidden="true" style="display:none;">
-            No rellenes este campo
-            <input type="text" name="sitio_web" tabindex="-1" autocomplete="off">
-          </label>
-
-          <div class="form-row">
-            <label>
-              <span>Tu nombre *</span>
-              <input type="text" name="nombre" autocomplete="given-name" required maxlength="100" placeholder="Ej. Carlos García">
-            </label>
-            <label>
-              <span>Nombre de tu negocio o empresa *</span>
-              <input type="text" name="empresa" autocomplete="organization" required maxlength="150" placeholder="Ej. Reformas García / Clínica Dental">
-            </label>
-          </div>
-
-          <div class="form-row">
-            <label>
-              <span>Teléfono de contacto *</span>
-              <input type="tel" name="telefono" autocomplete="tel" required maxlength="30" pattern="[0-9+\(\) .\-]{7,30}" placeholder="Ej. 612 345 678">
-            </label>
-            <label>
-              <span>Correo electrónico *</span>
-              <input type="email" name="email" autocomplete="email" required maxlength="190" placeholder="tu@empresa.com">
-            </label>
-          </div>
-
-          <label>
-            <span>Web actual <small class="optional-label">Opcional (si ya tienes una y quieres renovarla)</small></span>
-            <input type="url" name="web" autocomplete="url" maxlength="300" placeholder="https://tuwebactual.com">
-          </label>
-
-          <label>
-            <span>¿A qué te dedicas o qué necesitas en tu web? <small class="optional-label">Opcional</small></span>
-            <textarea name="reto" rows="3" maxlength="3000" placeholder="Cuéntanos brevemente tu sector, tus servicios principales o dudas que tengas..."></textarea>
-          </label>
-
-          <p class="privacy-summary">
-            <strong>Protección de datos:</strong> La Llave de tu Pyme (Ideas Imaginativas) tratará tus datos para responder a tu solicitud web con tu consentimiento. No se cederán a terceros salvo obligación legal. Puedes ejercer tus derechos en info@lallavedetupyme.com. <a href="/politica-de-privacidad/" target="_blank" rel="noopener">Política de Privacidad</a>.
-          </p>
-
-          <label class="consent">
-            <input type="checkbox" name="privacidad" value="1" required>
-            <span>Acepto la política de privacidad y autorizo a que me contacten para informarme sobre la creación de mi página web.</span>
-          </label>
-
-          <button class="button" type="submit">
-            Quiero mi web por 400 € con hosting gratis <span aria-hidden="true">→</span>
-          </button>
-
-          <div class="form-security-seal">
-            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-            <span>Solicitud sin compromiso ni cobro inmediato · Respuesta en 24h</span>
-          </div>
-
-          <div class="form-feedback" role="alert" aria-live="assertive" hidden></div>
-        </form>
-      </div>
     </div>
   </section>
 </main>
