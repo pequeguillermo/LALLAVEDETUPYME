@@ -35,12 +35,12 @@ require dirname(__DIR__) . '/partials/header.php';
           <span class="card-link">Ver servicio <span aria-hidden="true">↗</span></span>
         </a>
 
-        <a class="service-card" href="/servicios/diseno-web/" data-reveal>
+        <a class="service-card" href="/servicios/desarrollo-web/" data-reveal>
           <span class="service-number">02</span>
           <span class="service-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="9" width="36" height="28" rx="2"/><path d="M6 17h36M13 13h.1M19 13h.1M12 24h10v7H12M27 24h9M27 30h7"/></svg></span>
           <h3>Diseño y desarrollo web</h3>
-          <p>Una web que explica, orienta y convierte.</p>
-          <span class="card-link">Ver servicio <span aria-hidden="true">↗</span></span>
+          <p>Corporativa (desde 400€), E-commerce (desde 800€) y Landing (desde 150€). Todos con opción de hosting profesional.</p>
+          <span class="card-link">Ver soluciones y precios <span aria-hidden="true">↗</span></span>
         </a>
 
         <a class="service-card" href="/servicios/posicionamiento-seo/" data-reveal>
@@ -145,7 +145,7 @@ require dirname(__DIR__) . '/partials/header.php';
               <p>Recursos holgados de RAM y CPU en discos NVMe con disponibilidad del 99.9% ante picos de visitas.</p>
             </div>
           </div>
-        </a>a>
+        </a>
       </div>
     </div>
   </section>

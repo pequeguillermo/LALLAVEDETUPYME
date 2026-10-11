@@ -39,7 +39,7 @@ $displayWhatsapp = $showWhatsapp ?? ($type !== 'none');
       <div>
         <p class="footer-label">Servicios</p>
         <a href="/servicios/estrategia-digital/">Estrategia digital</a>
-        <a href="/servicios/diseno-web/">Diseño web</a>
+        <a href="/servicios/desarrollo-web/">Diseño y desarrollo web</a>
         <a href="/servicios/posicionamiento-seo/">Posicionamiento SEO</a>
         <a href="/servicios/publicidad-digital/">Publicidad digital</a>
         <a href="/servicios/redes-sociales/">Redes y contenidos</a>

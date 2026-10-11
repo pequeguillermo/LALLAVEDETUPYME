@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --ink: #070707;
   --ink-soft: #101012;
   --night: #10051d;
@@ -697,6 +697,366 @@ em { color: var(--orange); font-family: Georgia, serif; font-weight: 400; }
   .leak-cost-grid, .fit-grid { grid-template-columns: 1fr; }
 }
 
+/* ==========================================================================
+   DESARROLLO WEB: MODELOS Y SUBPÁGINAS (Corporativa, Ecommerce, Landing)
+   ========================================================================== */
+
+.web-solutions-section {
+  background: var(--night);
+  border-block: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.web-solutions-section::before {
+  content: "";
+  position: absolute;
+  top: -160px;
+  right: -120px;
+  width: 620px;
+  height: 620px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 77, 0, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.web-solutions-intro {
+  margin-bottom: 50px;
+}
+
+.web-solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.web-solution-card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(12, 11, 16, 0.88);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: 34px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+
+.web-solution-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.web-solution-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--orange);
+  box-shadow: 0 18px 45px rgba(255, 77, 0, 0.14);
+}
+
+.web-solution-card:hover::before {
+  background: var(--orange);
+}
+
+.web-solution-card.featured {
+  border-color: rgba(255, 77, 0, 0.45);
+  background: radial-gradient(circle at 100% 0%, rgba(255, 77, 0, 0.09), transparent 50%), rgba(14, 12, 19, 0.92);
+}
+
+.web-solution-card.featured::before {
+  background: var(--orange);
+}
+
+.solution-badge-ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+
+.solution-title-group h3 {
+  font-size: clamp(1.6rem, 2.2vw, 2.05rem);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.solution-title-group p {
+  color: #c2bdb5;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  min-height: 68px;
+}
+
+.solution-price-box {
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.solution-price-box .price-amount {
+  font-family: var(--display);
+  font-size: 2.15rem;
+  font-weight: 750;
+  color: var(--paper);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.solution-price-box .price-amount span {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--orange);
+}
+
+.solution-price-box .price-amount small {
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: #9c9790;
+  margin-left: 6px;
+}
+
+.solution-price-box .price-subtext {
+  font-size: 0.74rem;
+  color: #a49f97;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Badge y módulo de hosting */
+.solution-hosting-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 13px 15px;
+  background: rgba(86, 135, 255, 0.07);
+  border: 1px solid rgba(86, 135, 255, 0.24);
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.solution-hosting-banner svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--blue);
+  margin-top: 2px;
+}
+
+.solution-hosting-banner div strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 0.82rem;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 2px;
+}
+
+.solution-hosting-banner div p {
+  margin: 0;
+  font-size: 0.76rem;
+  color: #b8b3aa;
+  line-height: 1.4;
+  min-height: auto;
+}
+
+.solution-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.solution-bullets li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 0.88rem;
+  color: #d8d3ca;
+  line-height: 1.45;
+}
+
+.solution-bullets li::before {
+  content: "↗";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--orange);
+  font-weight: bold;
+}
+
+.solution-action {
+  margin-top: auto;
+}
+
+.solution-action .button {
+  width: 100%;
+}
+
+/* Banner de hosting global en la sección de soluciones */
+.web-hosting-cross-card {
+  margin-top: 48px;
+  padding: clamp(28px, 4vw, 40px);
+  background: linear-gradient(135deg, rgba(16, 5, 29, 0.95), rgba(7, 7, 7, 0.95));
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.web-hosting-cross-card .cross-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 22px;
+  max-width: 780px;
+}
+
+.web-hosting-cross-card .cross-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 77, 0, 0.12);
+  border: 1px solid rgba(255, 77, 0, 0.3);
+  border-radius: 8px;
+  display: grid;
+  place-content: center;
+  flex-shrink: 0;
+  color: var(--orange);
+}
+
+.web-hosting-cross-card .cross-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.web-hosting-cross-card h4 {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.web-hosting-cross-card p {
+  margin: 0;
+  color: #b8b3aa;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.web-hosting-cross-card .cross-btn {
+  flex-shrink: 0;
+}
+
+/* Estilos de las subpáginas dedicadas */
+.subpage-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+  margin-bottom: 30px;
+}
+
+.subpage-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-family: var(--display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.subpage-pill-price {
+  background: rgba(255, 77, 0, 0.14);
+  color: #fff;
+  border: 1px solid var(--orange);
+}
+
+.subpage-pill-hosting {
+  background: rgba(86, 135, 255, 0.12);
+  color: #dbe4ff;
+  border: 1px solid rgba(86, 135, 255, 0.35);
+}
+
+.subpage-pill-hosting svg {
+  width: 14px;
+  height: 14px;
+  color: var(--blue);
+}
+
+.subpage-hosting-feature-box {
+  background: radial-gradient(circle at 100% 0%, rgba(86, 135, 255, 0.12), transparent 45%), rgba(12, 11, 16, 0.9);
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  padding: clamp(34px, 5vw, 60px);
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.subpage-hosting-feature-box h3 {
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  margin-bottom: 16px;
+}
+
+.subpage-hosting-feature-box p {
+  color: #c9c4bc;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.subpage-hosting-perks {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.subpage-hosting-perks li {
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: var(--display);
+  font-size: 0.86rem;
+  color: #fff;
+}
+
+.subpage-hosting-perks li strong {
+  display: block;
+  color: var(--orange);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
 @media (max-width: 760px) {
   :root { --container: calc(100vw - 28px); }
   html { scroll-padding-top: 90px; }
@@ -787,6 +1147,14 @@ em { color: var(--orange); font-family: Georgia, serif; font-weight: 400; }
   .whatsapp-float { right: 14px; bottom: max(14px, env(safe-area-inset-bottom)); width: 54px; min-height: 54px; padding: 7px; }
   .whatsapp-icon { width: 38px; height: 38px; }
   .whatsapp-float > span:last-child { display: none; }
+  .web-solutions-grid { grid-template-columns: 1fr; gap: 24px; }
+  .web-solution-card { padding: 26px 20px; }
+  .web-solution-card .solution-title-group p { min-height: auto; }
+  .web-hosting-cross-card { flex-direction: column; align-items: flex-start; gap: 24px; padding: 26px 20px; }
+  .web-hosting-cross-card .cross-info { flex-direction: column; gap: 14px; }
+  .subpage-badge-row { flex-direction: column; align-items: flex-start; }
+  .subpage-hosting-feature-box { grid-template-columns: 1fr; gap: 30px; padding: 26px 20px; }
+  .subpage-hosting-perks { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
