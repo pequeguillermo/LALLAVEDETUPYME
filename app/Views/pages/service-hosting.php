@@ -16,7 +16,7 @@ require dirname(__DIR__) . '/partials/header.php';
       <div>
         <a class="back-link" href="/servicios/">← Todos los servicios</a>
         <span class="eyebrow">07 / Hosting profesional para pymes</span>
-        <h1>Tu web rápida, segura y siempre activa.<br><em>Sin sorpresas ni caídas.</em></h1>
+        <h1>Hosting profesional para pymes<br> <em>con soporte técnico</em></h1>
         <p class="hero-lead">Un alojamiento web pensado para negocios reales: servidores sobredimensionados con discos NVMe, IP 100% española para favorecer tu SEO local y copias de seguridad diarias y desubicadas para una tranquilidad absoluta.</p>
         <a class="button" href="/contacto/">Hablar de mi hosting <span aria-hidden="true">↗</span></a>
       </div>

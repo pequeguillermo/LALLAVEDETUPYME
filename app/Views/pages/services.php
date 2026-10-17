@@ -15,7 +15,7 @@ require dirname(__DIR__) . '/partials/header.php';
     <div class="container page-hero-grid">
       <div>
         <span class="eyebrow">Servicios de marketing y tecnología</span>
-        <h1>No necesitas más canales.<br><em>Necesitas que se entiendan.</em></h1>
+        <h1>Servicios de marketing digital<br> <em>para pymes</em></h1>
       </div>
       <div>
         <p class="hero-lead">Reunimos estrategia, creatividad, infraestructura y captación para resolver el siguiente problema del negocio, no para llenar una propuesta de líneas.</p>

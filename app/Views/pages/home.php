@@ -1,5 +1,5 @@
 ﻿<?php
-$title = 'Agencia de marketing para pymes | La Llave de tu Pyme';
+$title = 'Agencia de marketing digital para pymes | La Llave de tu Pyme';
 $description = 'Estrategia, web, SEO, publicidad, contenidos y automatización con capacidad de agencia y ritmo de equipo interno.';
 $canonical = 'https://lallavedetupyme.com/';
 $bodyClass = 'home-page';
@@ -14,7 +14,7 @@ require dirname(__DIR__) . '/partials/header.php';
       <div class="container hero-grid">
         <div class="hero-copy">
           <span class="eyebrow hero-kicker">Agencia de marketing para pymes que quieren avanzar</span>
-          <h1>Capacidad de agencia.<br><em>Ritmo de equipo interno.</em></h1>
+          <h1>Agencia de marketing digital<br> <em>para pymes</em></h1>
           <p class="hero-lead">Estrategia, web, SEO, campañas y automatización coordinadas por personas que están al otro lado cuando hay que decidir, corregir o poner algo en marcha.</p>
           <div class="hero-actions"><a class="button" href="/contacto/">Cuéntanos qué quieres mover <span aria-hidden="true">↗</span></a><a class="text-link" href="/servicios/">Ver todas las capacidades</a></div>
         </div>

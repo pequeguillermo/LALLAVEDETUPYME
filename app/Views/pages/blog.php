@@ -10,7 +10,7 @@ require dirname(__DIR__) . '/partials/header.php';
 <main id="contenido">
     <section class="page-hero blog-hero">
       <div class="container page-hero-grid">
-        <div><span class="eyebrow">Ideas que ayudan a decidir</span><h1>El blog vuelve a empezar. Esta vez, con algo que decir.</h1></div>
+        <div><span class="eyebrow">Ideas que ayudan a decidir</span><h1>Blog de marketing digital para pymes</h1></div>
         <div><p class="hero-lead">Hemos retirado el contenido anterior para construir un espacio más útil: análisis claros sobre qué frena la visibilidad, la captación y la conversión de una pyme.</p><a class="button" href="/agencia-marketing-conversiones/">Revisar qué está fallando <span aria-hidden="true">↗</span></a></div>
       </div>
     </section>

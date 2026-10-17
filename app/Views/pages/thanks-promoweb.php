@@ -42,7 +42,7 @@ require dirname(__DIR__) . '/partials/header.php';
         </span>
         
         <h1>
-          <?= $confirmed ? '¡Gracias por dar el paso!<br><em>Ahora nos toca a nosotros.</em>' : 'Una web profesional<br><em>para hacer crecer tu pyme.</em>' ?>
+          <?= $confirmed ? 'Gracias por solicitar tu web' : 'Solicitud de diseño web' ?>
         </h1>
         
         <p class="thanks-lead">

@@ -27,7 +27,7 @@ require dirname(__DIR__) . '/partials/header.php';
     <div class="container">
       <span class="social-thanks-symbol" aria-hidden="true"><?= $confirmed ? '✓' : '↗' ?></span>
       <span class="eyebrow"><?= $confirmed ? 'Solicitud recibida correctamente' : 'El siguiente paso para tus redes' ?></span>
-      <h1><?= $confirmed ? 'Gracias por dar el paso.<br><em>Ahora nos toca a nosotros.</em>' : 'Tus redes tienen<br><em>mucho que contar.</em>' ?></h1>
+      <h1><?= $confirmed ? 'Gracias por solicitar información sobre redes sociales' : 'Solicitud de gestión de redes sociales' ?></h1>
       <p class="hero-lead"><?= $confirmed ? 'Ya tenemos tu solicitud de community manager. Revisaremos la información de tu negocio y te contactaremos para concretar el plan y resolver tus dudas.' : 'Si ya nos has enviado el formulario, no necesitas repetirlo. Si todavía no lo has hecho, cuéntanos qué necesita tu negocio y hablamos.' ?></p>
       <?php if ($confirmed): ?>
         <div class="social-thanks-next"><span>¿Qué ocurre ahora?</span><p><strong>Revisamos tu negocio.</strong> Después hablamos contigo para acordar el contenido, el ritmo de publicación y cómo empezar.</p><small>No se ha realizado ningún cobro ni se ha activado una contratación.</small></div>

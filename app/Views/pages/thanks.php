@@ -16,6 +16,6 @@ $landingCtaHref = '/';
 require dirname(__DIR__) . '/partials/head.php';
 require dirname(__DIR__) . '/partials/header.php';
 ?>
-<main id="contenido"><section class="thanks-section"><div class="thanks-key" aria-hidden="true">⌁</div><div class="container"><span class="eyebrow"><?= $confirmed ? 'Solicitud recibida' : 'Contacto' ?></span><h1><?= $confirmed ? 'Gracias. Ya tenemos por dónde empezar.' : 'Hablemos de tu negocio.' ?></h1><p class="hero-lead"><?= $confirmed ? 'Tu mensaje ha llegado correctamente. Revisaremos el contexto y te responderemos para decidir el siguiente paso.' : 'Si quieres enviarnos una consulta, utiliza nuestro formulario de contacto.' ?></p><a class="button" href="/">Volver al inicio <span aria-hidden="true">↗</span></a></div></section></main>
+<main id="contenido"><section class="thanks-section"><div class="thanks-key" aria-hidden="true">⌁</div><div class="container"><span class="eyebrow"><?= $confirmed ? 'Solicitud recibida' : 'Contacto' ?></span><h1><?= $confirmed ? 'Gracias por tu solicitud de contacto' : 'Solicitud de contacto' ?></h1><p class="hero-lead"><?= $confirmed ? 'Tu mensaje ha llegado correctamente. Revisaremos el contexto y te responderemos para decidir el siguiente paso.' : 'Si quieres enviarnos una consulta, utiliza nuestro formulario de contacto.' ?></p><a class="button" href="/">Volver al inicio <span aria-hidden="true">↗</span></a></div></section></main>
 <?php
 require dirname(__DIR__) . '/partials/footer.php';

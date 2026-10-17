@@ -16,7 +16,7 @@ require dirname(__DIR__) . '/partials/header.php';
       <div>
         <a class="back-link" href="/servicios/">← Todos los servicios</a>
         <span class="eyebrow">02 / Diseño y desarrollo web</span>
-        <h1>Tu web debe hacer avanzar la conversación</h1>
+        <h1>Diseño y desarrollo web para pymes</h1>
         <p class="hero-lead">Desarrollamos soluciones web pensadas para el negocio: páginas corporativas para ganar solvencia, tiendas online para vender sin comisiones y landing pages de captación directa. Cada una con su propia arquitectura y con posibilidad de hosting profesional ultrarrápido.</p>
         <div class="hero-actions">
           <a class="button" href="#modelos">Ver soluciones y tarifas <span aria-hidden="true">↓</span></a>

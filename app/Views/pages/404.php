@@ -12,7 +12,7 @@ require dirname(__DIR__) . '/partials/header.php';
       <div class="thanks-key" aria-hidden="true">404</div>
       <div class="container">
         <span class="eyebrow">Esta ruta no abre ninguna puerta</span>
-        <h1>La página que buscas no está aquí.</h1>
+        <h1>Página no encontrada</h1>
         <p class="hero-lead">Puedes volver al inicio y continuar desde allí.</p>
         <a class="button" href="/">Volver al inicio <span aria-hidden="true">↗</span></a>
       </div>

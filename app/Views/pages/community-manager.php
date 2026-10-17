@@ -27,7 +27,7 @@ require dirname(__DIR__) . '/partials/header.php';
     <div class="container social-hero-grid">
       <div class="social-hero-copy">
         <span class="eyebrow">Community manager para pequeños negocios</span>
-        <h1>Tu negocio sigue.<br><em>Que tus redes<br>no se queden atrás.</em></h1>
+        <h1>Community manager y gestión<br> <em>de redes sociales para pymes</em></h1>
         <p class="hero-lead">La última publicación no debería ser de hace seis meses. Nos encargamos del contenido y de publicar con constancia para que tus redes transmitan lo que tu negocio es: <strong>un negocio en marcha.</strong></p>
         <a class="button" href="#activar-redes">Quiero mis redes activas <span aria-hidden="true">↗</span></a>
         <p class="social-hero-note">Desde <strong>99 €/mes + IVA</strong> · Facebook e Instagram<br>Textos, diseño y publicación incluidos.</p>
