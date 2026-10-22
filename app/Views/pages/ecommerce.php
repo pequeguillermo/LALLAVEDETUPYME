@@ -16,7 +16,7 @@ require dirname(__DIR__) . '/partials/header.php';
       <div>
         <a class="back-link" href="/servicios/desarrollo-web/">← Volver a Desarrollo Web</a>
         <span class="eyebrow">Desarrollo Web / Solución 02</span>
-        <h1>Tu tienda online lista para vender las 24 horas sin comisiones por pedido</h1>
+        <h1>Diseño de tiendas online y comercio electrónico</h1>
         <p class="hero-lead">Desarrollo de comercio electrónico profesional desde 800€ + IVA: catálogo intuitivo, pasarelas de pago seguras (Redsys, Bizum, Stripe, PayPal) y un proceso de compra rápido y sin fricciones en móviles y ordenadores.</p>
 
         <div class="subpage-badge-row">

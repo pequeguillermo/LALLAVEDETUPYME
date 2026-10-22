@@ -16,7 +16,7 @@ require dirname(__DIR__) . '/partials/header.php';
       <div>
         <a class="back-link" href="/servicios/desarrollo-web/">← Volver a Desarrollo Web</a>
         <span class="eyebrow">Desarrollo Web / Solución 03</span>
-        <h1>Landing pages diseñadas para convertir visitas en clientes reales</h1>
+        <h1>Diseño de landing pages para campañas de publicidad</h1>
         <p class="hero-lead">Diseño y desarrollo de páginas de aterrizaje desde 150€ + IVA para campañas de publicidad (Google Ads, Meta Ads) o lanzamientos específicos: una sola propuesta, cero distracciones y un recorrido directo hacia la llamada, el formulario o el mensaje de WhatsApp.</p>
 
         <div class="subpage-badge-row">

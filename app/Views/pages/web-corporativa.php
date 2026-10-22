@@ -16,7 +16,7 @@ require dirname(__DIR__) . '/partials/header.php';
       <div>
         <a class="back-link" href="/servicios/desarrollo-web/">← Volver a Desarrollo Web</a>
         <span class="eyebrow">Desarrollo Web / Solución 01</span>
-        <h1>Tu web corporativa debe transmitir solvencia y generar contactos</h1>
+        <h1>Diseño de webs corporativas para pymes</h1>
         <p class="hero-lead">Diseño y desarrollo a medida desde 400€ + IVA para empresas, despachos y profesionales que necesitan reflejar su nivel real, explicar su propuesta con claridad y convertir visitantes en clientes potenciales.</p>
 
         <div class="subpage-badge-row">

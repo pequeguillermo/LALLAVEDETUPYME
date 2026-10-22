@@ -6,6 +6,7 @@ const metaPixelId = "1010603668160172";
 const consentStorageKey = "llave_cookie_consent";
 const adsConfig = JSON.parse(document.getElementById("ads-config")?.textContent || "{}");
 let confirmedLead = JSON.parse(document.getElementById("confirmed-lead")?.textContent || "null");
+const measuredLeadIds = new Set();
 let pixelStarted = false;
 let metaPixelStarted = false;
 
@@ -80,7 +81,11 @@ function storeConsent(value) {
     confirmedLead = null;
     window.oaiq?.("consent", false);
     window.fbq?.("consent", "revoke");
-    try { sessionStorage.removeItem("llave_oppref"); } catch {}
+    try {
+      sessionStorage.removeItem("llave_oppref");
+      sessionStorage.removeItem("llave_google_attribution");
+      sessionStorage.removeItem("llave_measured_leads");
+    } catch {}
     const token = document.querySelector('meta[name="form-token"]')?.content;
     if (token) fetch('/medicion-consentimiento.php', {
       method: 'POST', body: new URLSearchParams({ token, choice: 'reject' }), keepalive: true,
@@ -91,7 +96,15 @@ function storeConsent(value) {
 }
 
 function trackConfirmedLead() {
-  if (readConsent() !== "accept" || adsConfig.local) return;
+  if (readConsent() !== "accept" || adsConfig.local || typeof window.gtag !== "function") return;
+  const lead = confirmedLead;
+  let previousIds = [];
+  try { previousIds = JSON.parse(sessionStorage.getItem("llave_measured_leads") || "[]"); } catch {}
+  if (!Array.isArray(previousIds)) previousIds = [];
+  if (lead?.eventId && (measuredLeadIds.has(lead.eventId) || previousIds.includes(lead.eventId))) {
+    confirmedLead = null;
+    return;
+  }
   loadPixel();
   loadMetaPixel();
   if (confirmedLead?.consented && confirmedLead.eventId && confirmedLead.expires * 1000 >= Date.now()) {
@@ -99,7 +112,8 @@ function trackConfirmedLead() {
     window.gtag?.("event", "generate_lead", {
       form_destination: isPromoWeb ? "promoweb" : confirmedLead.destination === "/gracias-community-manager/" ? "community_manager" : "contacto_web",
     });
-    if (isPromoWeb) {
+    const isWebsiteLead = isPromoWeb || confirmedLead.destination === "/gracias/";
+    if (isWebsiteLead) {
       window.gtag?.("event", "conversion", {
         send_to: googleAdsConversionSendTo,
         value: 0,
@@ -107,6 +121,10 @@ function trackConfirmedLead() {
         transaction_id: confirmedLead.eventId,
       });
     }
+    measuredLeadIds.add(confirmedLead.eventId);
+    try {
+      sessionStorage.setItem("llave_measured_leads", JSON.stringify([...previousIds, confirmedLead.eventId].slice(-30)));
+    } catch {}
   }
   confirmedLead = null;
 }
@@ -118,6 +136,7 @@ function googleConsent(accepted) {
 
 function loadAnalytics() {
   if (readConsent() !== "accept" || adsConfig.local) return;
+  captureGoogleAttribution();
   if (document.querySelector(`script[data-analytics-id="${analyticsId}"]`)) {
     trackConfirmedLead();
     return;
@@ -135,6 +154,35 @@ function loadAnalytics() {
   script.dataset.analyticsId = analyticsId;
   document.head.appendChild(script);
   trackConfirmedLead();
+}
+
+function captureGoogleAttribution() {
+  if (readConsent() !== "accept" || adsConfig.local) return {};
+  const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "gclid"];
+  const params = new URLSearchParams(location.search);
+  let saved = {};
+  try { saved = JSON.parse(sessionStorage.getItem("llave_google_attribution") || "{}"); } catch {}
+  if (!saved || typeof saved !== "object" || Array.isArray(saved)) saved = {};
+  const incoming = {};
+  for (const key of keys) {
+    const value = params.get(key);
+    if (value && value.length <= 150) incoming[key] = value;
+  }
+  // Una nueva visita etiquetada sustituye la atribución anterior de esta pestaña.
+  const attribution = Object.keys(incoming).length ? incoming : Object.fromEntries(
+    keys.filter(key => typeof saved[key] === "string" && saved[key].length <= 150).map(key => [key, saved[key]])
+  );
+  try { sessionStorage.setItem("llave_google_attribution", JSON.stringify(attribution)); } catch {}
+  return attribution;
+}
+
+function trackFormStep(form, eventName, details = {}) {
+  if (readConsent() !== "accept" || adsConfig.local || typeof window.gtag !== "function") return false;
+  const origin = form.querySelector('[name="origen"]')?.value;
+  const formId = origin === "PromoWeb" ? "promoweb" : origin === "Desarrollo Web" ? "desarrollo_web"
+    : origin === "Community Manager" ? "community_manager" : "contacto_web";
+  window.gtag("event", eventName, { form_id: formId, form_location: location.pathname, ...details });
+  return true;
 }
 
 document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"], a[href^="tel:"]').forEach((link) => {
@@ -229,10 +277,24 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
   const submitButton = form.querySelector('button[type="submit"]');
   const originalButtonContent = submitButton?.innerHTML;
   let submitting = false;
+  let startMeasured = false;
+  let lastValidationError = 0;
+  const measureStart = () => {
+    if (!startMeasured) startMeasured = trackFormStep(form, "lead_form_start");
+  };
+  form.addEventListener("focusin", measureStart, { once: false });
+  form.addEventListener("invalid", () => {
+    measureStart();
+    if (Date.now() - lastValidationError > 1500) {
+      trackFormStep(form, "lead_form_error", { error_type: "validation" });
+      lastValidationError = Date.now();
+    }
+  }, true);
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (submitting) return;
+    measureStart();
     const fields = [...form.querySelectorAll("input, textarea, select")];
     fields.forEach((field) => {
       if (field.checkValidity()) field.removeAttribute("aria-invalid");
@@ -240,6 +302,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     });
     const firstInvalid = fields.find((field) => !field.checkValidity());
     if (firstInvalid) {
+      trackFormStep(form, "lead_form_error", { error_type: "validation" });
       firstInvalid.focus();
       return;
     }
@@ -254,12 +317,18 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
     }
 
     submitting = true;
+    let responseStatus = 0;
+    trackFormStep(form, "lead_form_attempt");
     try {
       const body = new FormData(form);
       const consent = readConsent() === "accept" ? "accept" : "reject";
       storeConsent(consent);
       body.set("measurement_consent", consent);
       if (consent === "accept") {
+        const attribution = captureGoogleAttribution();
+        for (const [key, value] of Object.entries(attribution)) {
+          if (!body.get(key)) body.set(key, value);
+        }
         const oppref = captureAttribution();
         if (oppref) body.set("oppref", oppref);
       }
@@ -268,6 +337,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
         body,
         headers: { Accept: "application/json" },
       });
+      responseStatus = response.status;
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.message || "No hemos podido enviar tu solicitud.");
       const allowedDestinations = ["/gracias/", "/gracias-community-manager/", "/promoweb/gracias/", "/gracias-promoweb/"];
@@ -275,6 +345,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
       window.location.assign(destination);
     } catch (error) {
       submitting = false;
+      trackFormStep(form, "lead_form_error", { error_type: responseStatus ? "server" : "network", http_status: responseStatus });
       if (feedback) {
         feedback.textContent = error instanceof Error ? error.message : "No hemos podido enviar tu solicitud.";
         feedback.classList.add("is-error");

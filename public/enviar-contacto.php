@@ -79,6 +79,7 @@ $challenge = $value('reto');
 $origin = $value('origen');
 $isSocial = $origin === 'Community Manager';
 $isPromoWeb = $origin === 'PromoWeb' || $origin === 'Desarrollo Web';
+$isContact = $origin === 'Contacto';
 $destination = $isPromoWeb ? '/promoweb/gracias/' : ($isSocial ? '/gracias-community-manager/' : '/gracias/');
 $plans = [
     'presencia' => 'Presencia · 99 €/mes + IVA · Publicación cada 15 días',
@@ -92,19 +93,16 @@ if ($isSocial || $isPromoWeb) {
     if ($isSocial && ($plan === '' || $company === '')) {
         respond(422, 'Indica tu negocio y selecciona un plan o la opción de orientación.', $wantsJson);
     }
-    if ($isPromoWeb && $company === '') {
-        respond(422, 'Indica el nombre de tu empresa o negocio.', $wantsJson);
+}
+foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'] as $utm) {
+    $campaignValue = $value($utm);
+    if (mb_strlen($campaignValue, 'UTF-8') > 150) {
+        respond(422, 'La información de campaña no es válida. Vuelve a abrir el formulario.', $wantsJson);
     }
-    foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid'] as $utm) {
-        $campaignValue = $value($utm);
-        if (mb_strlen($campaignValue, 'UTF-8') > 150) {
-            respond(422, 'La información de campaña no es válida. Vuelve a abrir el formulario.', $wantsJson);
-        }
-        if ($campaignValue !== '') $campaign[$utm] = $campaignValue;
-    }
+    if ($campaignValue !== '') $campaign[$utm] = $campaignValue;
 }
 
-if ($name === '' || $email === '' || (!$isSocial && !$isPromoWeb && $challenge === '' && $blocker === '') || empty($_POST['privacidad'])) {
+if ($name === '' || $email === '' || (!$isSocial && !$isPromoWeb && !$isContact && $challenge === '' && $blocker === '') || empty($_POST['privacidad'])) {
     respond(422, 'Revisa los campos obligatorios y acepta la política de privacidad.', $wantsJson);
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
