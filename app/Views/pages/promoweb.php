@@ -11,7 +11,7 @@ $landingCtaText = 'Pedir información';
 $landingCtaHref = '#pedir-web';
 $footerType = 'conversion';
 $whatsappMessage = 'Hola, vengo del anuncio de la web para pymes a 400€ con hosting gratis 6 meses y quiero información.';
-$headExtra = '<link rel="stylesheet" href="/promoweb.css?v=20261022-1">';
+$headExtra = '<link rel="stylesheet" href="/promoweb.css?v=20261022-2">';
 
 $schemaJson = json_encode([
     '@context' => 'https://schema.org',
@@ -166,6 +166,37 @@ require dirname(__DIR__) . '/partials/header.php';
   </div>
 
   <!-- PAIN POINTS SECTION -->
+  <section class="promoweb-portfolio" id="trabajos-realizados">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Proyectos reales</span>
+        <h2>Webs que hemos realizado</h2>
+        <p>Visita estos trabajos y conoce nuestra forma de presentar negocios y contenidos en la web.</p>
+      </div>
+      <div class="portfolio-grid">
+        <article class="portfolio-card">
+          <a class="portfolio-logo portfolio-logo-light" href="https://sinmaspiojitos.com/" target="_blank" rel="noopener noreferrer" aria-label="Ver la web de Sin Más Piojitos">
+            <img src="/assets/portfolio/sin-mas-piojitos.webp" alt="Sin Más Piojitos" width="600" height="240" loading="lazy" decoding="async">
+          </a>
+          <div class="portfolio-copy"><span class="eyebrow">Servicios y centros</span><h3>Sin Más Piojitos</h3><p>Una web que presenta sus servicios y ayuda a encontrar el centro donde pedir cita.</p><a class="text-link" href="https://sinmaspiojitos.com/" target="_blank" rel="noopener noreferrer">Ver web <span aria-hidden="true">↗</span></a></div>
+        </article>
+        <article class="portfolio-card">
+          <a class="portfolio-logo" href="https://www.naturalsurfhouse.com/" target="_blank" rel="noopener noreferrer" aria-label="Ver la web de Natural Surf House">
+            <img src="/assets/portfolio/natural-surf-house.webp" alt="Natural Surf House" width="600" height="240" loading="lazy" decoding="async">
+          </a>
+          <div class="portfolio-copy"><span class="eyebrow">Turismo y surf</span><h3>Natural Surf House</h3><p>Alojamientos, experiencias y viajes de surf en Maldivas, con información y consulta de fechas.</p><a class="text-link" href="https://www.naturalsurfhouse.com/" target="_blank" rel="noopener noreferrer">Ver web <span aria-hidden="true">↗</span></a></div>
+        </article>
+        <article class="portfolio-card">
+          <a class="portfolio-logo portfolio-logo-light" href="https://www.womanessentia.com/" target="_blank" rel="noopener noreferrer" aria-label="Ver la web de Woman Essentia">
+            <img src="/assets/portfolio/woman-essentia.webp" alt="Woman Essentia" width="600" height="240" loading="lazy" decoding="async">
+          </a>
+          <div class="portfolio-copy"><span class="eyebrow">Revista digital</span><h3>Woman Essentia</h3><p>Un proyecto editorial con artículos de actualidad, cultura y entrevistas organizados por secciones.</p><a class="text-link" href="https://www.womanessentia.com/" target="_blank" rel="noopener noreferrer">Ver web <span aria-hidden="true">↗</span></a></div>
+        </article>
+      </div>
+      <p class="portfolio-note">Son proyectos con alcances distintos. Antes de contratar, concretamos contigo qué incluye tu web de 400 € + IVA.</p>
+    </div>
+  </section>
+
   <section class="promoweb-pains">
     <div class="container">
       <div class="section-head">
