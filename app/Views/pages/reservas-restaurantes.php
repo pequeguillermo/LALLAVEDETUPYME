@@ -11,7 +11,7 @@ $landingCtaText = 'Quiero la promoción';
 $landingCtaHref = '#solicitar-promocion';
 $footerType = 'conversion';
 $showWhatsapp = false;
-$headExtra = '<link rel="stylesheet" href="/reservas.css?v=20261111-3">';
+$headExtra = '<link rel="stylesheet" href="/reservas.css?v=20261111-4">';
 $schemaJson = json_encode([
     '@context' => 'https://schema.org', '@type' => 'Service',
     'name' => 'Sistema de reservas online para restaurantes', 'url' => $canonical,
@@ -61,12 +61,13 @@ require dirname(__DIR__) . '/partials/header.php';
     <div class="container reservas-direct-grid">
       <div class="reservas-direct-copy">
         <p class="reservas-small-label">Reservas directas desde tu web</p>
-        <h2 id="reservas-directas">¿Tus reservas dependen de plataformas con comisión?</h2>
-        <p class="reservas-direct-lead">Si ya te han encontrado, pónselo fácil para reservar directamente contigo.</p>
-        <p>Ofrece reservas desde tu propia web y gestiona las solicitudes en tu panel. Refuerza tu canal directo por <strong>25 €/mes + IVA de por vida</strong> al contratar la promoción.</p>
-        <a class="reservas-button" href="#solicitar-promocion">Quiero la promoción</a>
+        <h2 id="reservas-directas">¿Cuánto te cuesta cada reserva de un cliente habitual?</h2>
+        <p class="reservas-direct-lead">Si ya te conocen, pónselo fácil para reservar en tu web.</p>
+        <p>Si pagas comisiones por determinadas reservas o una cuota por funciones que no necesitas, ese coste cuenta. Da a tus clientes un canal directo para su próxima visita.</p>
+        <p>Recibe las reservas desde tu web y gestiónalas en tu panel por <strong>25 €/mes + IVA de por vida</strong> al contratar la promoción.</p>
+        <a class="reservas-button" href="#solicitar-promocion">Quiero reservas desde mi web</a>
       </div>
-      <aside class="reservas-channel-card" aria-label="Canales de reservas y referencia de plataforma">
+      <aside class="reservas-channel-card" aria-label="Tu canal directo y otras plataformas de reservas">
         <div class="reservas-direct-channel">
           <span>Tu canal propio</span>
           <strong>Tu web. Tus reservas.</strong>
@@ -74,11 +75,19 @@ require dirname(__DIR__) . '/partials/header.php';
           <small>Con WordPress o una web de código propio.</small>
         </div>
         <div class="reservas-platform-reference">
-          <p>¿Ya utilizas plataformas como TheFork?</p>
-          <div class="reservas-platform-brand"><img src="/assets/brands/thefork-manager.svg" width="190" height="22" loading="lazy" decoding="async" alt="TheFork Manager"><span>Antes ElTenedor</span></div>
-          <p>Las comisiones varían según el canal y el contrato. TheFork también ofrece su widget para web y redes sociales sin comisión.</p>
-          <a href="https://www.theforkmanager.com/es/software-restaurantes-precio" target="_blank" rel="noopener noreferrer">Consultar los planes y condiciones de TheFork</a>
-          <small>Marca citada como referencia. Sin afiliación ni integración con TheFork.</small>
+          <p>¿Trabajas con TheFork u otra plataforma?</p>
+          <ul class="reservas-platforms" aria-label="Plataformas de reservas: consulta sus condiciones oficiales">
+            <li><a href="https://www.theforkmanager.com/es/software-restaurantes-precio" target="_blank" rel="noopener noreferrer"><img src="/assets/brands/thefork-manager.svg" width="146" height="17" loading="lazy" decoding="async" alt="TheFork Manager"><span>Antes ElTenedor</span></a></li>
+            <li><a href="https://www.opentable.es/restaurant-solutions/planes/" target="_blank" rel="noopener noreferrer"><strong>OpenTable</strong><span>Planes y condiciones</span></a></li>
+            <li><a href="https://www.covermanager.com/" target="_blank" rel="noopener noreferrer"><strong>CoverManager</strong><span>Información del servicio</span></a></li>
+            <li><a href="https://www.restoo.me/precios" target="_blank" rel="noopener noreferrer"><strong>Restoo</strong><span>Planes y condiciones</span></a></li>
+          </ul>
+          <p>Compara el coste total, las funciones que utilizas y de dónde llegan tus reservas.</p>
+          <details class="reservas-platform-conditions">
+            <summary>Cada plataforma tiene condiciones distintas</summary>
+            <p>TheFork y OpenTable incluyen las reservas de tu web en sus planes y cobran por determinadas reservas de su red. Restoo publica planes sin comisión por reserva. Compara las funciones de cada servicio y revisa las condiciones de tu contrato.</p>
+          </details>
+          <small>Marcas citadas como referencia. Sin afiliación ni integración con estos servicios.</small>
         </div>
       </aside>
     </div>
