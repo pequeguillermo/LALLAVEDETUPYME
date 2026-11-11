@@ -110,10 +110,13 @@ foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
     if ($campaignValue !== '') $campaign[$utm] = $campaignValue;
 }
 
-if ($name === '' || $email === '' || (!$isSocial && !$isPromoWeb && !$isContact && !$isReservations && $challenge === '' && $blocker === '') || empty($_POST['privacidad'])) {
+if ((!$isReservations && ($name === '' || $email === '')) || (!$isSocial && !$isPromoWeb && !$isContact && !$isReservations && $challenge === '' && $blocker === '') || empty($_POST['privacidad'])) {
     respond(422, 'Revisa los campos obligatorios y acepta la política de privacidad.', $wantsJson);
 }
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+if ($isReservations && ($company === '' || $phone === '')) {
+    respond(422, 'Indica el nombre del restaurante y un teléfono de contacto.', $wantsJson);
+}
+if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     respond(422, 'Introduce un correo electrónico válido.', $wantsJson);
 }
 if ($phone !== '' && !preg_match('/^[0-9+() .\-]{7,30}$/', $phone)) {
@@ -176,7 +179,7 @@ try {
 }
 try {
     $mailer = new ContactMailer($config['mail'] ?? [], dirname(__DIR__) . '/storage/logs/contactos-local.log');
-    $subject = $isPromoWeb ? ('Nueva solicitud PromoWeb (400€) · ' . $name) : ($isSocial ? ('Nueva solicitud Community Manager · ' . $name) : ($isReservations ? ('Nueva solicitud Reservas Restaurantes (25 €/mes) · ' . $name) : ('Nueva solicitud web · ' . $name)));
+    $subject = $isPromoWeb ? ('Nueva solicitud PromoWeb (400€) · ' . $name) : ($isSocial ? ('Nueva solicitud Community Manager · ' . $name) : ($isReservations ? ('Nueva solicitud Reservas Restaurantes (25 €/mes) · ' . $company) : ('Nueva solicitud web · ' . $name)));
     $mailer->send($subject, $html, $email);
 } catch (Throwable) {
     $q = $store->db->prepare("UPDATE submissions SET status='mail_failed' WHERE token=?");

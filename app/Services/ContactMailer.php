@@ -42,9 +42,11 @@ final class ContactMailer
             'Content-Type: text/html; charset=UTF-8',
             'Content-Transfer-Encoding: 8bit',
             'From: ' . $safeFromName . ' <' . $fromEmail . '>',
-            'Reply-To: <' . $safeReplyTo . '>',
             'X-Mailer: PHP/' . PHP_VERSION,
         ];
+        if ($safeReplyTo !== '') {
+            $headers[] = 'Reply-To: <' . $safeReplyTo . '>';
+        }
 
         if (!mail($recipient, $this->encodeHeader($subject), $html, implode("\r\n", $headers))) {
             throw new RuntimeException('El servidor no ha aceptado el mensaje.');
