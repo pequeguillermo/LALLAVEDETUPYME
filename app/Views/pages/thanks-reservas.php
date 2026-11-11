@@ -15,7 +15,7 @@ $confirmed = is_array($confirmation)
     && ($confirmation['destination'] ?? '') === '/sistema-reservas-restaurantes/gracias/'
     && ($confirmation['expires'] ?? 0) >= time();
 if ($confirmed) unset($_SESSION['confirmation']);
-$headExtra = '<link rel="stylesheet" href="/reservas.css?v=20261111-2">';
+$headExtra = '<link rel="stylesheet" href="/reservas.css?v=20261111-3">';
 if ($confirmed) $headExtra .= '<script type="application/json" id="confirmed-lead">' . json_encode($confirmation, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) . '</script>';
 require dirname(__DIR__) . '/partials/head.php';
 require dirname(__DIR__) . '/partials/header.php';

@@ -11,7 +11,7 @@ $landingCtaText = 'Quiero la promoción';
 $landingCtaHref = '#solicitar-promocion';
 $footerType = 'conversion';
 $showWhatsapp = false;
-$headExtra = '<link rel="stylesheet" href="/reservas.css?v=20261111-2">';
+$headExtra = '<link rel="stylesheet" href="/reservas.css?v=20261111-3">';
 $schemaJson = json_encode([
     '@context' => 'https://schema.org', '@type' => 'Service',
     'name' => 'Sistema de reservas online para restaurantes', 'url' => $canonical,
@@ -54,6 +54,33 @@ require dirname(__DIR__) . '/partials/header.php';
         </div>
         <figcaption>Vista ilustrativa con datos de ejemplo. Sin información de clientes.</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <section class="reservas-direct reservas-section" aria-labelledby="reservas-directas">
+    <div class="container reservas-direct-grid">
+      <div class="reservas-direct-copy">
+        <p class="reservas-small-label">Reservas directas desde tu web</p>
+        <h2 id="reservas-directas">¿Tus reservas dependen de plataformas con comisión?</h2>
+        <p class="reservas-direct-lead">Si ya te han encontrado, pónselo fácil para reservar directamente contigo.</p>
+        <p>Ofrece reservas desde tu propia web y gestiona las solicitudes en tu panel. Refuerza tu canal directo por <strong>25 €/mes + IVA de por vida</strong> al contratar la promoción.</p>
+        <a class="reservas-button" href="#solicitar-promocion">Quiero la promoción</a>
+      </div>
+      <aside class="reservas-channel-card" aria-label="Canales de reservas y referencia de plataforma">
+        <div class="reservas-direct-channel">
+          <span>Tu canal propio</span>
+          <strong>Tu web. Tus reservas.</strong>
+          <p>Un lugar donde tus clientes pueden elegir fecha, hora y número de comensales, sin salir de tu web.</p>
+          <small>Con WordPress o una web de código propio.</small>
+        </div>
+        <div class="reservas-platform-reference">
+          <p>¿Ya utilizas plataformas como TheFork?</p>
+          <div class="reservas-platform-brand"><img src="/assets/brands/thefork-manager.svg" width="190" height="22" loading="lazy" decoding="async" alt="TheFork Manager"><span>Antes ElTenedor</span></div>
+          <p>Las comisiones varían según el canal y el contrato. TheFork también ofrece su widget para web y redes sociales sin comisión.</p>
+          <a href="https://www.theforkmanager.com/es/software-restaurantes-precio" target="_blank" rel="noopener noreferrer">Consultar los planes y condiciones de TheFork</a>
+          <small>Marca citada como referencia. Sin afiliación ni integración con TheFork.</small>
+        </div>
+      </aside>
     </div>
   </section>
 
