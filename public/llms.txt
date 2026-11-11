@@ -13,6 +13,7 @@
 
 ## Servicios
 
+- [Sistema de reservas para restaurantes](https://lallavedetupyme.com/sistema-reservas-restaurantes/): reservas online y club de clientes, integrados con WordPress o código propio. Promoción 25 €/mes + IVA de por vida al contratar ahora; habitual 50 €/mes + IVA. Web gratis para negocios que no tienen una, con hosting gratis el primer año y después 100 €/año independiente de la cuota mensual.
 - [Planes de community manager](https://lallavedetupyme.com/community-manager/): mantenimiento quincenal por 99 €/mes o publicación semanal y difusión en grupos por 199 €/mes, más IVA. Facebook e Instagram, con texto y diseño incluidos.
 - [Estrategia digital](https://lallavedetupyme.com/servicios/estrategia-digital/)
 - [Diseño y desarrollo web](https://lallavedetupyme.com/servicios/diseno-web/)

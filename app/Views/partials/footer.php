@@ -44,6 +44,7 @@ $displayWhatsapp = $showWhatsapp ?? ($type !== 'none');
         <a href="/servicios/publicidad-digital/">Publicidad digital</a>
         <a href="/servicios/redes-sociales/">Redes y contenidos</a>
         <a href="/community-manager/">Planes de community manager</a>
+        <a href="/sistema-reservas-restaurantes/">Reservas para restaurantes</a>
         <a href="/servicios/automatizacion-y-funnels/">Automatización y funnels</a>
         <a href="/servicios/hosting-para-pymes/">Hosting para pymes</a>
       </div>
@@ -76,7 +77,7 @@ $displayWhatsapp = $showWhatsapp ?? ($type !== 'none');
 <?php endif; ?>
 
 <?php if ($type !== 'none'): ?>
-<script src="/app.js?v=20261022-1" defer></script>
+<script src="/app.js?v=20261111-1" defer></script>
 <?php endif; ?>
 </body>
 </html>

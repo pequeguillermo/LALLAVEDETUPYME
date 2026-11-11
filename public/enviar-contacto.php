@@ -49,7 +49,7 @@ try {
         $prevOrigin = $previousContact['origin'] ?? '';
         $destination = ($prevOrigin === 'PromoWeb' || $prevOrigin === 'Desarrollo Web')
             ? '/promoweb/gracias/'
-            : (($prevOrigin === 'Community Manager') ? '/gracias-community-manager/' : '/gracias/');
+            : (($prevOrigin === 'Community Manager') ? '/gracias-community-manager/' : (($prevOrigin === 'Reservas Restaurantes') ? '/sistema-reservas-restaurantes/gracias/' : '/gracias/'));
         respond(200, 'Solicitud ya recibida.', $wantsJson, $destination);
     }
     if ($previous !== null && $previous['status'] === 'receiving') {
@@ -80,14 +80,22 @@ $origin = $value('origen');
 $isSocial = $origin === 'Community Manager';
 $isPromoWeb = $origin === 'PromoWeb' || $origin === 'Desarrollo Web';
 $isContact = $origin === 'Contacto';
-$destination = $isPromoWeb ? '/promoweb/gracias/' : ($isSocial ? '/gracias-community-manager/' : '/gracias/');
+$isReservations = $origin === 'Reservas Restaurantes';
+$destination = $isPromoWeb ? '/promoweb/gracias/' : ($isSocial ? '/gracias-community-manager/' : ($isReservations ? '/sistema-reservas-restaurantes/gracias/' : '/gracias/'));
 $plans = [
     'presencia' => 'Presencia · 99 €/mes + IVA · Publicación cada 15 días',
     'impulso' => 'Impulso · 199 €/mes + IVA · Publicación semanal y difusión en grupos',
     'asesoramiento' => 'Necesita orientación para elegir un plan',
     'promoweb' => 'Desarrollo Web Pyme · 400 € + IVA · Hosting 6 meses gratis',
+    'reservas' => 'Reservas Restaurantes · 25 €/mes + IVA de por vida al contratar la promoción · Habitual 50 €/mes + IVA · Web gratis si no tiene · Hosting gratis 1 año, después 100 €/año',
 ];
-$plan = $isSocial ? ($plans[$value('plan')] ?? '') : ($isPromoWeb ? $plans['promoweb'] : '');
+$plan = $isSocial ? ($plans[$value('plan')] ?? '') : ($isPromoWeb ? $plans['promoweb'] : ($isReservations ? $plans['reservas'] : ''));
+if ($isReservations) {
+    $webSituation = $value('situacion_web');
+    if (!in_array($webSituation, ['', 'Sí, ya tengo web', 'No, quiero la web gratis', 'Estoy preparando una web'], true)) {
+        respond(422, 'Selecciona una opción válida sobre tu web.', $wantsJson);
+    }
+}
 $campaign = [];
 if ($isSocial || $isPromoWeb) {
     if ($isSocial && ($plan === '' || $company === '')) {
@@ -102,7 +110,7 @@ foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
     if ($campaignValue !== '') $campaign[$utm] = $campaignValue;
 }
 
-if ($name === '' || $email === '' || (!$isSocial && !$isPromoWeb && !$isContact && $challenge === '' && $blocker === '') || empty($_POST['privacidad'])) {
+if ($name === '' || $email === '' || (!$isSocial && !$isPromoWeb && !$isContact && !$isReservations && $challenge === '' && $blocker === '') || empty($_POST['privacidad'])) {
     respond(422, 'Revisa los campos obligatorios y acepta la política de privacidad.', $wantsJson);
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -132,6 +140,9 @@ foreach ($limits as [$field, $limit]) {
 }
 
 $safe = static fn (string $text): string => htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+if ($isReservations && $webSituation !== '') {
+    $challenge = 'Situación de la web: ' . $webSituation . ($challenge !== '' ? "\n\n" . $challenge : '');
+}
 $row = static fn (string $label, string $text): string => $text === '' ? '' : '<p><strong>' . $label . ':</strong> ' . $safe($text) . '</p>';
 $html = '<!doctype html><html lang="es"><body style="margin:0;background:#f3f0e9;font-family:Arial,sans-serif;color:#101010">'
     . '<div style="max-width:680px;margin:30px auto;background:#fff;border:1px solid #ded8cc">'
@@ -165,7 +176,7 @@ try {
 }
 try {
     $mailer = new ContactMailer($config['mail'] ?? [], dirname(__DIR__) . '/storage/logs/contactos-local.log');
-    $subject = $isPromoWeb ? ('Nueva solicitud PromoWeb (400€) · ' . $name) : ($isSocial ? ('Nueva solicitud Community Manager · ' . $name) : ('Nueva solicitud web · ' . $name));
+    $subject = $isPromoWeb ? ('Nueva solicitud PromoWeb (400€) · ' . $name) : ($isSocial ? ('Nueva solicitud Community Manager · ' . $name) : ($isReservations ? ('Nueva solicitud Reservas Restaurantes (25 €/mes) · ' . $name) : ('Nueva solicitud web · ' . $name)));
     $mailer->send($subject, $html, $email);
 } catch (Throwable) {
     $q = $store->db->prepare("UPDATE submissions SET status='mail_failed' WHERE token=?");

@@ -29,6 +29,8 @@ final class Page
         '/community-manager/' => 'community-manager.php',
         '/gracias-community-manager/' => 'thanks-social.php',
         '/promoweb/' => 'promoweb.php',
+        '/sistema-reservas-restaurantes/' => 'reservas-restaurantes.php',
+        '/sistema-reservas-restaurantes/gracias/' => 'thanks-reservas.php',
         '/promoweb/gracias/' => 'thanks-promoweb.php',
         '/gracias-promoweb/' => 'thanks-promoweb.php',
         '/blog/' => 'blog.php',

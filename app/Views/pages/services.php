@@ -169,6 +169,12 @@ require dirname(__DIR__) . '/partials/header.php';
   </section>
 
   <section class="section fit-section">
+    <div class="container" style="margin-bottom:64px">
+      <h2>Reservas online para restaurantes</h2>
+      <p class="hero-lead">Reservas de mesa, gestión de comensales y club de clientes, con integración en WordPress o webs de código propio. Ahora, 25 €/mes + IVA de por vida si contratas la promoción. Precio habitual: 50 €/mes + IVA.</p>
+      <p>Si todavía no tienes web, te la hacemos gratis e incluimos el hosting el primer año. Después, hosting 100 €/año, independiente de la cuota del sistema.</p>
+      <a class="button" href="/sistema-reservas-restaurantes/">Ver el sistema de reservas y la promoción</a>
+    </div>
     <div class="container split-intro">
       <div>
         <span class="eyebrow">Cómo elegimos</span>

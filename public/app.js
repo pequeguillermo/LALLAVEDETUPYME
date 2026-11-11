@@ -110,7 +110,7 @@ function trackConfirmedLead() {
   if (confirmedLead?.consented && confirmedLead.eventId && confirmedLead.expires * 1000 >= Date.now()) {
     const isPromoWeb = ["/promoweb/gracias/", "/gracias-promoweb/"].includes(confirmedLead.destination);
     window.gtag?.("event", "generate_lead", {
-      form_destination: isPromoWeb ? "promoweb" : confirmedLead.destination === "/gracias-community-manager/" ? "community_manager" : "contacto_web",
+      form_destination: isPromoWeb ? "promoweb" : confirmedLead.destination === "/gracias-community-manager/" ? "community_manager" : confirmedLead.destination === "/sistema-reservas-restaurantes/gracias/" ? "reservas_restaurantes" : "contacto_web",
     });
     const isWebsiteLead = isPromoWeb || confirmedLead.destination === "/gracias/";
     if (isWebsiteLead) {
@@ -180,7 +180,7 @@ function trackFormStep(form, eventName, details = {}) {
   if (readConsent() !== "accept" || adsConfig.local || typeof window.gtag !== "function") return false;
   const origin = form.querySelector('[name="origen"]')?.value;
   const formId = origin === "PromoWeb" ? "promoweb" : origin === "Desarrollo Web" ? "desarrollo_web"
-    : origin === "Community Manager" ? "community_manager" : "contacto_web";
+    : origin === "Community Manager" ? "community_manager" : origin === "Reservas Restaurantes" ? "reservas_restaurantes" : "contacto_web";
   window.gtag("event", eventName, { form_id: formId, form_location: location.pathname, ...details });
   return true;
 }
@@ -340,7 +340,7 @@ document.querySelectorAll("[data-contact-form]").forEach((form) => {
       responseStatus = response.status;
       const data = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(data.message || "No hemos podido enviar tu solicitud.");
-      const allowedDestinations = ["/gracias/", "/gracias-community-manager/", "/promoweb/gracias/", "/gracias-promoweb/"];
+      const allowedDestinations = ["/gracias/", "/gracias-community-manager/", "/promoweb/gracias/", "/gracias-promoweb/", "/sistema-reservas-restaurantes/gracias/"];
       const destination = allowedDestinations.includes(data.redirect) ? data.redirect : (typeof data.redirect === "string" && data.redirect.startsWith("/") ? data.redirect : "/gracias/");
       window.location.assign(destination);
     } catch (error) {
