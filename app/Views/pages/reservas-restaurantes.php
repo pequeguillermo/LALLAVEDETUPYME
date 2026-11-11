@@ -11,7 +11,7 @@ $landingCtaText = 'Quiero la promoción';
 $landingCtaHref = '#solicitar-promocion';
 $footerType = 'conversion';
 $showWhatsapp = false;
-$headExtra = '<link rel="stylesheet" href="/reservas.css?v=20261111-1">';
+$headExtra = '<link rel="stylesheet" href="/reservas.css?v=20261111-2">';
 $schemaJson = json_encode([
     '@context' => 'https://schema.org', '@type' => 'Service',
     'name' => 'Sistema de reservas online para restaurantes', 'url' => $canonical,
